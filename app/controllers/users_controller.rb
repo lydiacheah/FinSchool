@@ -5,7 +5,9 @@ class UsersController < Clearance::UsersController
 	def home
 		if current_user.nil?
 			redirect_to sign_in_path
-		end
+		else
+      redirect_to games_path
+    end
 	end
 
 	def show
