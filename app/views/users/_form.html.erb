@@ -1,9 +1,25 @@
-<div class="text-field">
-  <%= form.label :email %>
-  <%= form.text_field :email, type: 'email' %>
-</div>
+<%= form_for User.new do |form| %>		
+	<div class="text-field">
+		<%= form.text_field :name, placeholder: "Your full name" %>
+	</div>
 
-<div class="password-field">
-  <%= form.label :password %>
-  <%= form.password_field :password %>
-</div>
+	<div class="text-field">
+	  <%= form.text_field :email, type: 'email', placeholder: "Your email address" %>
+	</div>
+
+	<div class="password-field">
+	  <%= form.password_field :password, placeholder: "Create a password" %>
+	</div>
+
+	<%= button_to "Get Started", sign_up_path, class: "btn", id: "get-started-button" %>
+
+<div class="other-links">
+  <button class="loginBtn loginBtn-facebook">
+    <a href="/auth/facebook">Continue with Facebook</a>
+  </button>
+  <button class="loginBtn loginBtn-google">
+    <a href="/auth/google_oauth2">Continue with Google</a>
+  </button>
+  <br>
+	<button type="button" class="btn btn-link" id="sign-in-email">Already have an account?</button>
+<% end %>

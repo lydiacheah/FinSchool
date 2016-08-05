@@ -1,6 +1,25 @@
-<div id="clearance" class="sign-in">
-  <h2><%= t(".title") %></h2>
+<div id="start-background">
+	<div id="goal-question">
+		What's your financial goal?
+	</div>
+	<div id="goal-go">
+		<%= text_field_tag :financial_goal, "RM ", id: "goal-input" %>
+		<%= submit_tag "➜", class: "btn btn-primary btn-lg outline", id: "goal-submit" %>
+	</div>
+	<div id="sign-in-button">
+		<button type="button" class="btn btn-link" id="sign-in-link">Already told us your goal?</button>
+	</div>	
+</div>
 
-  <%= render partial: '/sessions/form' %>
+<!-- HIDDEN -->
 
+<div id="box">
+	<div class="new-forms" id="sign-in-form">
+		<%= render partial: 'sessions/form' %>
+	</div>
+	<div class="new-forms" id="sign-up-form">
+		<h2>Keep track of your progress now.</h2>
+		<%= render partial: 'users/form' %>
+	</div>
+	</div>
 </div>
