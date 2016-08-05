@@ -1,3 +1,48 @@
 // Place all the styles related to the games controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+body {
+	background-color: #F8F8F8;
+
+}
+
+.background {
+	position:fixed;
+	padding: 0;
+	margin: 0;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+	z-index: 10;
+	
+}
+
+.container {
+	width: 80%;
+	background-color: #fff;
+	color: #404040;
+}
+
+.font_awesome {
+	margin-left: 100px;
+}
+
+.fa {
+	color: #565a5c;
+}
+
+
+.preview {
+	font-size: 20px;
+	color: #9babb9;
+}
+
+.preview:hover, .preview:focus {
+	text-decoration: none;
+}

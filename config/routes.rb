@@ -1,11 +1,8 @@
 Rails.application.routes.draw do
-<<<<<<< HEAD
-  get 'pages/home'
 
-  root 'pages#home'
-=======
+  
   root 'users#home'
->>>>>>> master
+  resources :games
 
   # Omniauth Routes
   get "/auth/:provider/callback" => "sessions#create_from_omniauth"
