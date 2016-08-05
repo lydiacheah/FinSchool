@@ -23,4 +23,10 @@ Rails.application.routes.draw do
   
   # Games routes
   resources :games, only: [:show, :index]
+
+  # Games rate refresher routes
+  post '/refresh_fd_rates' => 'games#refresh_fixed_depoits_rates'
+  post '/refresh_ut_rates' => 'gameses#refresh_unit_trust_rates'
+  post '/refresh_s_rates' => 'games#refresh_stock_rates'
+
 end
