@@ -9,7 +9,7 @@
 		</div>
 		<div class="row">
 			<div class="col-md-4">
-				<%= link_to fixed_deposit_path, class: "preview" do %>
+				<%= link_to game_path('fixed_deposit'), class: "preview" do %>
 					<div class="panel panel-default">					
 						<div class="panel-heading">
 							<img src=<%= asset_path 'fixeddeposit.jpg' %> alt="Fixed Deposit" class="img-thumbnail">
@@ -21,7 +21,7 @@
 				<% end %>
 			</div>
 			<div class="col-md-4">
-				<%= link_to unit_trust_path, class: "preview" do %>
+				<%= link_to game_path('unit_trust'), class: "preview" do %>
 					<div class="panel panel-default ">
 						<div class="panel-heading">
 							<img src=<%= asset_path 'unittrust.png' %> alt="Unit Trust" class="img-thumbnail">
@@ -33,7 +33,7 @@
 				<% end %>
 			</div>
 			<div class="col-md-4">
-				<%= link_to stock_market_path, class: "preview" do %>
+				<%= link_to game_path('stock'), class: "preview" do %>
 					<div class="panel panel-default">
 						<div class="panel-heading">
 							<img src=<%= asset_path 'stock.png' %> alt="Fixed Deposit" class="img-thumbnail" >
