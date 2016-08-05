@@ -20,8 +20,8 @@ class SessionsController < Clearance::SessionsController
 		    @notice = "Welcome back!"
 		  else
 				user = User.create_with_auth_and_hash(authentication,auth_hash)
-		    @next = root_url # edit_user_path(user)   
-		    @notice = "User successfully created. Welcome to Finschool!"
+		    @next = edit_user_path(user)   
+		    @notice = "Welcome to Finschool. Why don't you tell us more about yourself?"
 		  end
 			  sign_in(user)
 			  redirect_to @next, flash:{success: @notice}

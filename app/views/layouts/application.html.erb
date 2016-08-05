@@ -6,7 +6,7 @@
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
-   <meta name="viewport" content="width=device-width, initial-scale-1.0">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- Latest compiled and minified CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
@@ -14,18 +14,20 @@
   <!-- Optional theme -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
 
-<!-- Jquery -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <!-- Jquery -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 
   <!-- Latest compiled and minified JavaScript -->  
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 
 
-<script src="https://js.braintreegateway.com/v2/braintree.js"></script>
+  <script src="https://js.braintreegateway.com/v2/braintree.js"></script>
 
+
+  <link href="https://fonts.googleapis.com/css?family=Comfortaa" rel="stylesheet">
 
 </head>
-<body>
+<body class="container-fluid">
   <div id="header">
     <% if signed_in? -%>
       <%= button_to t(".sign_out"), sign_out_path, method: :delete %>
@@ -34,10 +36,8 @@
     <% end -%>
   </div>
 
-  <div id="flash">
-    <% flash.each do |key, value| -%>
-      <div id="flash_<%= key %>"><%=h value %></div>
-    <% end %>
+  <div id="flashes">
+    <%= render 'layouts/flashes' %>
   </div>
 
    
