@@ -16,6 +16,8 @@
 
 @import "bootstrap-sprockets";
 @import "bootstrap";
+@import "font-awesome-sprockets";
+@import "font-awesome";
 
 #flashes {
   position: absolute;
@@ -34,4 +36,9 @@
 
 .alert-notice {
   @extend .alert-danger;
+
+
+
+body {
+	background-color: #F8F8F8;
 }
