@@ -1,0 +1,15 @@
+<%= form_for @user do |form| %>
+	<%= form.label :email %>
+	<br>
+  <%= form.text_field :email, type: 'email' %>
+
+	<%= form.label "How shall we address you?" %>
+	<br>
+	<%= form.text_field :nickname %>
+
+	<%= form.label :birthday %>
+  <br>
+  <%= form.date_field :birthday %>
+
+  <%= form.submit %>
+<% end %>

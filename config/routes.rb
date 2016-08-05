@@ -1,11 +1,13 @@
 Rails.application.routes.draw do
-  root 'users#show'
+  root 'users#home'
 
   # Omniauth Routes
   get "/auth/:provider/callback" => "sessions#create_from_omniauth"
   resources :users, only: [:show, :edit, :update, :destroy] 
+
+  get "/home" => "users#home", as: "home"
   
-  # Clearance default routes
+  # Clearance routes
   resources :passwords, controller: "clearance/passwords", only: [:create, :new]
   resource :session, controller: "clearance/sessions", only: [:create]
 
@@ -15,7 +17,8 @@ Rails.application.routes.draw do
       only: [:create, :edit, :update]
   end
 
-  get "/sign_in" => "clearance/sessions#new", as: "sign_in"
+  get "/start" => "clearance/sessions#new", as: "sign_in"
   delete "/sign_out" => "sessions#destroy", as: "sign_out"
   get "/sign_up" => "clearance/users#new", as: "sign_up"
+
 end
