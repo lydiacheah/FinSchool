@@ -2,29 +2,26 @@
 <html>
 <head>
   <title>FinSchool</title>
+
+  <%= javascript_include_tag 'application' %>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <%= csrf_meta_tag %>
+
   <link href="/app/favicon.ico" rel="icon" type="image/x-icon" />
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- Latest compiled and minified CSS -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPx`Gmkzs7" crossorigin="anonymous">
-
-  <!-- Optional theme -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
-
-  <!-- Jquery -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-
-  <!-- Latest compiled and minified JavaScript -->  
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-
+  
 
   <script src="https://js.braintreegateway.com/v2/braintree.js"></script>
 
 
+
   <link href="https://fonts.googleapis.com/css?family=Comfortaa" rel="stylesheet">
+
 
 </head>
 <body class="container-fluid">
@@ -39,9 +36,6 @@
   <div id="flashes">
     <%= render 'layouts/flashes' %>
   </div>
-
-   
-
 
   <%= yield %>
 

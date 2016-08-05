@@ -30,6 +30,11 @@ ActiveRecord::Schema.define(version: 20160805033143) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "pages", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "profiles", force: :cascade do |t|
     t.integer  "user_id",                                                null: false
     t.decimal  "financial_goal",  precision: 8, scale: 2,                null: false

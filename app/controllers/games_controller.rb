@@ -1,5 +1,6 @@
 class GamesController < ApplicationController
 
+
 	require 'json'
 	include GamesHelper
 
@@ -20,6 +21,7 @@ class GamesController < ApplicationController
 
 	def index
 	end
+
 
 	# rates refresher
 	def refresh_fixed_depoits_rates
@@ -42,4 +44,5 @@ class GamesController < ApplicationController
 			format.json {render json: @new_stock_rate}
 		end
 	end
+
 end
