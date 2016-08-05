@@ -10,11 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
-ActiveRecord::Schema.define(version: 20160804120847) do
-=======
 ActiveRecord::Schema.define(version: 20160805033143) do
->>>>>>> master
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,22 +24,17 @@ ActiveRecord::Schema.define(version: 20160805033143) do
     t.datetime "updated_at", null: false
   end
 
-<<<<<<< HEAD
-=======
   create_table "games", force: :cascade do |t|
     t.string   "name",       null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
->>>>>>> master
   create_table "pages", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-<<<<<<< HEAD
-=======
   create_table "profiles", force: :cascade do |t|
     t.integer  "user_id",                                                null: false
     t.decimal  "financial_goal",  precision: 8, scale: 2,                null: false
@@ -63,7 +54,6 @@ ActiveRecord::Schema.define(version: 20160805033143) do
     t.datetime "updated_at",                           null: false
   end
 
->>>>>>> master
   create_table "users", force: :cascade do |t|
     t.string   "name",                                       null: false
     t.string   "nickname"
