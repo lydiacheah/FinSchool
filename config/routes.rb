@@ -20,5 +20,7 @@ Rails.application.routes.draw do
   get "/start" => "clearance/sessions#new", as: "sign_in"
   delete "/sign_out" => "sessions#destroy", as: "sign_out"
   get "/sign_up" => "clearance/users#new", as: "sign_up"
-
+  get "/fixed_deposit" => "games#fd_show"
+  get "/unit_trust" => "games#ut_show"
+  get "/stock_market" => "games#sm_show"
 end
