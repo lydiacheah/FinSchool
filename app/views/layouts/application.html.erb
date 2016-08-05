@@ -2,10 +2,14 @@
 <html>
 <head>
   <title>FinSchool</title>
-  <%= javascript_include_tag 'application' %>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   <%= csrf_meta_tag %>
+
+  <link href="https://fonts.googleapis.com/css?family=Comfortaa" rel="stylesheet">
 </head>
-<body>
+<body class="container-fluid">
   <div id="header">
     <% if signed_in? -%>
       <%= button_to t(".sign_out"), sign_out_path, method: :delete %>
@@ -14,10 +18,8 @@
     <% end -%>
   </div>
 
-  <div id="flash">
-    <% flash.each do |key, value| -%>
-      <div id="flash_<%= key %>"><%=h value %></div>
-    <% end %>
+  <div id="flashes">
+    <%= render 'layouts/flashes' %>
   </div>
 
   <%= yield %>

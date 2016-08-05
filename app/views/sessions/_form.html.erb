@@ -1,24 +1,25 @@
 <%= form_for :session, url: session_path do |form| %>
   <div class="text-field">
-    <%= form.label :email %>
-    <%= form.text_field :email, type: 'email' %>
+    <%= form.text_field :email, type: 'email', placeholder: "Email address" %>
   </div>
 
   <div class="password-field">
-    <%= form.label :password %>
-    <%= form.password_field :password %>
+    <%= form.password_field :password, placeholder: "Password" %>
   </div>
 
   <div class="submit-field">
-    <%= form.submit %>
+    <%= form.submit "Continue with your Progress" %>
   </div>
 
   <div class="other-links">
-    <%= link_to "Login with Facebook", '/auth/facebook' %>
-    <%= link_to "Login with Google", "/auth/google_oauth2" %>
-    <% if Clearance.configuration.allow_sign_up? %>
-      <%= link_to t(".sign_up"), sign_up_path %>
-    <% end %>
+    <button class="loginBtn loginBtn-facebook">
+      <a href="/auth/facebook">Continue with Facebook</a>
+    </button>
+    <button class="loginBtn loginBtn-google">
+      <a href="/auth/google_oauth2">Continue with Google</a>
+    </button>
+    <br>
+    <button type="button" class="btn btn-link" id="sign-up-email">Sign Up with email instead</button><br>
     <%= link_to t(".forgot_password"), new_password_path %>
   </div>
 <% end %>
