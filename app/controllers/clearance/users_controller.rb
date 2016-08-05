@@ -18,7 +18,7 @@ class Clearance::UsersController < Clearance::BaseController
     @user = User.new(permit_params)
     if @user.save
       sign_in @user
-      redirect_back_or url_after_create
+      redirect_to edit_user_path(@user)
     else
       render template: "users/new"
     end
