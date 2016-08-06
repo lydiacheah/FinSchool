@@ -88,8 +88,8 @@
 
 	<div class="form-group">
        <input type="number" min="1" max="<%= current_user_active_profile.current_balance %>" autocomplete="off" placeholder="0.00"/>
-       <button id="start" class="btn btn-primary">Place Deposit</button>
-        <button id="stop" class="btn btn-danger">Uplift Deposit</button>
+       <button id="place" class="btn btn-primary">Place Deposit</button>
+        <button id="withdraw" class="btn btn-danger">Uplift Deposit</button>
   </div>
 
   <div class="progress-wrapper">
@@ -112,42 +112,51 @@
     $startAmount = 0;
     $endAmount = 0;
 
-    $('start').attr('disabled', 'true');
-    $('#stop').attr('disabled', 'true');
+    $('#place').attr('disabled', 'true');
+    $('#withdraw').attr('disabled', 'true');
     $('input').removeAttr('disabled');
 
     $('input').on('input change blur', function(){
       var startBalance = Number($('#start_balance').text());
       var placementAmount = $('input').val();
-      if (placementAmount > startBalance || placementAmount == 0 || $progressRate == 0){
-        $('#start').attr('disabled', 'true');
+      if (placementAmount > startBalance || placementAmount == 0 || $interestRate == 0){
+        $('#place').attr('disabled', 'true');
       }else{
-        $('#start').removeAttr('disabled');
+        $('#place').removeAttr('disabled');
       }
     });
       
     $('#3months').click(function(){
-      $progressRate = 150
-      $interestRate = $rate1
-      $(this).css("border", "1px red solid")
-      $('#6months').css("border", "")
-      $('#9months').css("border", "")
+      $progressRate = 150;
+      $interestRate = $rate1;
+      $(this).css("border", "1px red solid");
+      $('#6months').css("border", "");
+      $('#9months').css("border", "");
+      if ($('input').val() != 0){
+        $('#place').removeAttr('disabled');
+      }
     })
 
     $('#6months').click(function(){
-      $progressRate = 300
-      $interestRate = $rate2
-      $(this).css("border", "1px red solid")
-      $('#3months').css("border", "")
-      $('#9months').css("border", "")
+      $progressRate = 300;
+      $interestRate = $rate2;
+      $(this).css("border", "1px red solid");
+      $('#3months').css("border", "");
+      $('#9months').css("border", "");
+      if ($('input').val() != 0){
+        $('#place').removeAttr('disabled');
+      }
     })
 
     $('#9months').click(function(){
-      $progressRate = 450
-      $interestRate = $rate3
-      $(this).css("border", "1px red solid")
-      $('#3months').css("border", "")
-      $('#6months').css("border", "")
+      $progressRate = 450;
+      $interestRate = $rate3;
+      $(this).css("border", "1px red solid");
+      $('#3months').css("border", "");
+      $('#6months').css("border", "");
+      if ($('input').val() != 0){
+        $('#place').removeAttr('disabled');
+      }
     })
 
 
@@ -170,10 +179,10 @@
 
     refreshRates();
 
-    $('#start').click(function(){
+    $('#place').click(function(){
 
-      $('#stop').removeAttr('disabled');
-      $('#start').attr('disabled', 'true');
+      $('#withdraw').removeAttr('disabled');
+      $('#place').attr('disabled', 'true');
       $('input').attr('disabled', 'true');
 
       var startBalance = Number($('#start_balance').text());
@@ -188,8 +197,8 @@
         $('.progress-bar').attr("style", "width:"+progressbar+"%")
         $('.progress-bar').text(Math.floor(progressbar)+"%")
         if (progressbar >= 100){
-          $('#stop').removeClass("btn-danger")
-          $('#stop').addClass("btn-success")
+          $('#withdraw').removeClass("btn-danger")
+          $('#withdraw').addClass("btn-success")
           clearInterval(progress);
           var profit = (placementAmount * (1 + $interestRate/100)).toFixed(4);
           $('#profit').text(profit);
@@ -199,28 +208,39 @@
 
     });
 
-    $('#stop').click(function(){
+    $('#withdraw').click(function(){
       clearInterval(progress);
-      progressbar = 0;
-      $interestRate = 0;
       var startBalance = Number($('#start_balance').text());
-      var profitEarned = Number($('#profit').text());
-      $endAmount = profitEarned;
-      var newBalance = (startBalance + profitEarned).toFixed(2);
-      $('#start_balance').text(newBalance);
+      if (progressbar < 100){
+        var placementAmount = Number($('#amount_placed').text());
+        var updateStartBalance = (startBalance + placementAmount).toFixed(2);
+        $('#start_balance').text(updateStartBalance);
+        $endAmount = $startAmount
+      }else{
+        var profitEarned = Number($('#profit').text());
+        $endAmount = profitEarned;
+        var newBalance = (startBalance + profitEarned).toFixed(2);
+        $('#start_balance').text(newBalance);
+      }
+      progressbar = 0;
+      $interestRate = 0;      
       $('#profit').text(0);
       $('#amount_placed').text(0);
       $('#interest_rate').text(0);
+      $('input').val("");
       $('.progress-bar').text(progressbar+"%");
       $('.progress-bar').attr("style", "width:"+progressbar+"%");
       $('input').removeAttr('disabled');
-      $('#stop').attr('disabled', 'true');
-      $('#stop').removeClass('btn-success');
-      $('#stop').addClass('btn-danger');
+      $('#withdraw').attr('disabled', 'true');
+      $('#place').attr('disabled', 'true');
+      $('#withdraw').removeClass('btn-success');
+      $('#withdraw').addClass('btn-danger');
       $('#3months').css("border", "");
       $('#6months').css("border", "");
       $('#9months').css("border", "");
-      
+      alert($startAmount);
+      alert($endAmount);
+
     });
 
     
