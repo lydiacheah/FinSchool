@@ -32,4 +32,10 @@ Rails.application.routes.draw do
   post '/refresh_ut_rates' => 'games#refresh_unit_trust_rates'
   post '/refresh_s_rates' => 'games#refresh_stock_rates'
 
+  # Transaction routes
+  resources :transactions, only: [:create, :show, :index]
+
+  # Profile routes
+  resources :profiles, except: [:edit, :destroy]
+
 end
