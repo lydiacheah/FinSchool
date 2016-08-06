@@ -23,6 +23,8 @@ class GamesController < ApplicationController
 	end
 
 
+
+
 	# rates refresher
 	def refresh_fixed_depoits_rates
 		@new_fixed_deposit_rate = fixed_deposit_rates

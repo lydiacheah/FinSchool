@@ -82,23 +82,15 @@
 
 	<div class="form-group">
        <input type="integer">
-       <input type="submit" value="Deposit">
-    </div>
+       <button id="start" class="btn btn-primary">Place Deposit</button>
+        <button id="stop" class="btn btn-danger">Uplift Deposit</button>
+  </div>
 
-
-
-<button>Button</button>
-<button id="start">Start</button>
-<button id="stop">Stop</button>
-
-<br><br>
-
-<div class="container">
-  <div class="progress progress-striped">
-    <div class="progress-bar progress-bar-success" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+  <div class="progress-wrapper">
+    <div class="progress progress-striped">
+      <div class="progress-bar progress-bar-success" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
     </div>
   </div>
-</div>
 
 
 
@@ -106,9 +98,8 @@
 <script type="text/javascript">
   $(document).ready(function(){
 
-    $('button').click(function(){
-      
-    });
+    $('#stop').attr('disabled', 'true')
+    $('input').removeAttr('disabled')
 
     var timer = null;
     var progress = null;
@@ -122,13 +113,17 @@
     }
 
     $('#start').click(function(){
+
+      $('#stop').removeAttr('disabled')
+      $('input').attr('disabled', 'true')
       
       progress = setInterval(function(){
         progressbar += 1;
         $('.progress-bar').attr("style", "width:"+progressbar+"%")
         $('.progress-bar').text(progressbar+"%")
         if (progressbar >= 100){
-          $('.progress-bar').addClass("progress-bar-success")
+          $('#stop').removeClass("btn-danger")
+          $('#stop').addClass("btn-success")
           clearInterval(progress);
           $.ajax({
             method: "post",
@@ -172,11 +167,6 @@
 </script>
 
 
-<div class="form-group">
-        <input type="submit" value="Progress Bar">
-        <input type="submit" value="Re-invest">
-        <input type="submit" value="Sell">
-      </div>
     <br>
   
 
