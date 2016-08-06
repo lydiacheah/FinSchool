@@ -46,5 +46,6 @@ class GamesController < ApplicationController
 			format.json {render json: @new_stock_rate}
 		end
 	end
+	
 
 end

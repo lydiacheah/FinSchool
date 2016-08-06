@@ -87,9 +87,10 @@
  </div>
 
 	<div class="form-group">
-       <input type="number" min="1" max="<%= current_user_active_profile.current_balance %>" autocomplete="off" placeholder="0.00"/>
-       <button id="place" class="btn btn-primary">Place Deposit</button>
-        <button id="withdraw" class="btn btn-danger">Uplift Deposit</button>
+      <input type="hidden" id="user_profile" user-id="<%= get_current_user_profile_path %>">
+      <input id="user_amount" type="number" min="1" max="<%= current_user_active_profile.current_balance %>" autocomplete="off" placeholder="0.00"/>
+      <button id="place" class="btn btn-primary">Place Deposit</button>
+      <button id="withdraw" class="btn btn-danger">Uplift Deposit</button>
   </div>
 
   
@@ -111,14 +112,15 @@
     $progressRate = 0;
     $startAmount = 0;
     $endAmount = 0;
+    $months = 0;
 
     $('#place').attr('disabled', 'true');
     $('#withdraw').attr('disabled', 'true');
-    $('input').removeAttr('disabled');
+    $('#user_amount').removeAttr('disabled');
 
-    $('input').on('input change blur', function(){
+    $('#user_amount').on('input change blur', function(){
       var startBalance = Number($('#start_balance').text());
-      var placementAmount = $('input').val();
+      var placementAmount = $('#user_amount').val();
       if (placementAmount > startBalance || placementAmount == 0 || $interestRate == 0){
         $('#place').attr('disabled', 'true');
       }else{
@@ -129,10 +131,11 @@
     $('#3months').click(function(){
       $progressRate = 150;
       $interestRate = $rate1;
+      $months = 3;
       $(this).css("border", "1px red solid");
       $('#6months').css("border", "");
       $('#9months').css("border", "");
-      if ($('input').val() != 0 && progressbar == 0){
+      if ($('user_amount').val() != 0 && progressbar == 0){
         $('#place').removeAttr('disabled');
       }
     })
@@ -140,10 +143,11 @@
     $('#6months').click(function(){
       $progressRate = 300;
       $interestRate = $rate2;
+      $months = 6;
       $(this).css("border", "1px red solid");
       $('#3months').css("border", "");
       $('#9months').css("border", "");
-      if ($('input').val() != 0 && progressbar == 0){
+      if ($('user_amount').val() != 0 && progressbar == 0){
         $('#place').removeAttr('disabled');
       }
     })
@@ -151,10 +155,11 @@
     $('#9months').click(function(){
       $progressRate = 450;
       $interestRate = $rate3;
+      $months = 9;
       $(this).css("border", "1px red solid");
       $('#3months').css("border", "");
       $('#6months').css("border", "");
-      if ($('input').val() != 0 && progressbar == 0){
+      if ($('user_amount').val() != 0 && progressbar == 0){
         $('#place').removeAttr('disabled');
       }
     })
@@ -162,19 +167,48 @@
 
     function refreshRates(){
       $.ajax({
-            method: "post",
-            url: "/refresh_fd_rates",
-            beforeSend: function(xhr){xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
-            dataType: "json",
-            success: function(data){
-              $('#3months span').text(data[0]);
-              $('#6months span').text(data[1]);
-              $('#9months span').text(data[2]);
-              $rate1 = data[0]
-              $rate2 = data[1]
-              $rate3 = data[2]
+        method: "post",
+        url: "/refresh_fd_rates",
+        beforeSend: function(xhr){xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
+        dataType: "json",
+        success: function(data){
+          $('#3months span').text(data[0]);
+          $('#6months span').text(data[1]);
+          $('#9months span').text(data[2]);
+          $rate1 = data[0]
+          $rate2 = data[1]
+          $rate3 = data[2]
+        }
+      });
+    }
+
+    function saveGame(startAmount, endAmount, months, profit){
+      $.ajax({
+        method: "post",
+        url: "/transactions",
+        beforeSend: function(xhr){xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
+        data: {
+          transaction: {
+            game_id: "1",
+            start_amount: startAmount,
+            end_amount: endAmount,
+            months: months
             }
-          });
+        }
+      });
+    }
+
+    function update_user_profile(profit){
+      $.ajax({
+        method: "post",
+        url: $("#user_profile").attr("user-id"),
+        beforeSend: function(xhr){xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
+        data: { _method: 'PUT', current_balance: profit },
+        success: function(){
+          $('.form-group').append('<span id="msg" style="color:red;"> *Successfully uplifted</span>');
+          setTimeout(function(){$("#msg").remove()},3000);
+        }
+      });
     }
 
     refreshRates();
@@ -183,11 +217,11 @@
 
       $('#withdraw').removeAttr('disabled');
       $('#place').attr('disabled', 'true');
-      $('input').attr('disabled', 'true');
+      $('#user_amount').attr('disabled', 'true');
 
       var startBalance = Number($('#start_balance').text());
-      $startAmount = startBalance;
-      var placementAmount = $('input').val();
+      var placementAmount = $('#user_amount').val();
+      $startAmount = placementAmount;
       var updateStartBalance = (startBalance - placementAmount).toFixed(2);
       $('#start_balance').text(updateStartBalance);
       $('#interest_rate').text($interestRate);
@@ -231,10 +265,10 @@
       $('#profit').text(0);
       $('#amount_placed').text(0);
       $('#interest_rate').text(0);
-      $('input').val("");
+      $('#user_amount').val("");
       $('.progress-bar').text(progressbar+"%");
       $('.progress-bar').attr("style", "width:"+progressbar+"%");
-      $('input').removeAttr('disabled');
+      $('#user_amount').removeAttr('disabled');
       $('#withdraw').attr('disabled', 'true');
       $('#place').attr('disabled', 'true');
       $('#withdraw').removeClass('btn-success');
@@ -242,6 +276,13 @@
       $('#3months').css("border", "");
       $('#6months').css("border", "");
       $('#9months').css("border", "");
+      $profit = ($endAmount - $startAmount).toFixed(2);
+      saveGame($startAmount, $endAmount, $months);
+      update_user_profile($profit);
+      $startAmount = 0;
+      $endAmount = 0;
+      $months = 0;
+      $profit = 0;
 
     });
 
