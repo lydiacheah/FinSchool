@@ -23,6 +23,9 @@ module GamesHelper
 		s_rates = [rate1, rate2, rate3, rate4, rate5].to_json
 	end
 
+  def current_user_active_profile
+    @user_profile = Profile.find_by(user_id: current_user.id, active: true)
+  end
 
   def generate_unit_trust_variables
 	@test = "Hello World"

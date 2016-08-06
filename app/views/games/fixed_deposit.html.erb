@@ -79,6 +79,9 @@
    </div>
  </div>
 
+ <div>
+   <p>Current Balance : <span id="balance"><%= current_user_active_profile.current_balance %></span></p>
+ </div>
 
 	<div class="form-group">
        <input type="integer">
@@ -98,8 +101,10 @@
 <script type="text/javascript">
   $(document).ready(function(){
 
-    $('#stop').attr('disabled', 'true')
-    $('input').removeAttr('disabled')
+    $('#stop').attr('disabled', 'true');
+    $('input').removeAttr('disabled');
+    var balance = $('#balance').text();
+    var placementAmount = $('input').val();
 
     var timer = null;
     var progress = null;
