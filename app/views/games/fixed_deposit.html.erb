@@ -79,12 +79,14 @@
    </div>
  </div>
 
- <div>
-   <p>Current Balance : <span id="balance"><%= current_user_active_profile.current_balance %></span></p>
+ <div id="status">
+   <p>Current Balance : <span id="start_balance"><%= current_user_active_profile.current_balance %></span></p>
+   <p>Amount Placed : <span id="amount_placed">0</span></p>
+   <p>Profit Earned : <span id="profit">0</span></p>
  </div>
 
 	<div class="form-group">
-       <input type="integer">
+       <input type="number" min="1" max="<%= current_user_active_profile.current_balance %>" autocomplete="off" placeholder="0.00"/>
        <button id="start" class="btn btn-primary">Place Deposit</button>
         <button id="stop" class="btn btn-danger">Uplift Deposit</button>
   </div>
@@ -101,27 +103,37 @@
 <script type="text/javascript">
   $(document).ready(function(){
 
-    $('#stop').attr('disabled', 'true');
-    $('input').removeAttr('disabled');
-    var balance = $('#balance').text();
-    var placementAmount = $('input').val();
-
-    var timer = null;
     var progress = null;
-    var count = 10;
     var progressbar = 0;
 
-    function displayTime(){
-      var min = Math.floor((count / 60) % 60)
-      var sec = count % 60
-      $('#time').text(min+':'+sec);
-    }
+    $('start').attr('disabled', 'true');
+    $('#stop').attr('disabled', 'true');
+    $('input').removeAttr('disabled');
+
+    $('input').on('input change', function(){
+      $startBalance = $('#start_balance').text();
+      $placementAmount = $('input').val();
+      if ($placementAmount > Number($startBalance) || $placementAmount == 0){
+        $('#start').attr('disabled', 'true');
+      }else{
+        $('#start').removeAttr('disabled');
+      }
+    });
+      
+    
 
     $('#start').click(function(){
 
-      $('#stop').removeAttr('disabled')
-      $('input').attr('disabled', 'true')
-      
+      $('#stop').removeAttr('disabled');
+      $('#start').attr('disabled', 'true');
+      $('input').attr('disabled', 'true');
+
+      $startBalance = $('#start_balance').text();
+      $placementAmount = $('input').val();
+      $updateStartBalance = $startBalance - $placementAmount;
+      $('#start_balance').text($updateStartBalance);
+      $('#end_balance').text($updateStartBalance);
+      $('#amount_placed').text($placementAmount);
       progress = setInterval(function(){
         progressbar += 1;
         $('.progress-bar').attr("style", "width:"+progressbar+"%")
@@ -130,6 +142,9 @@
           $('#stop').removeClass("btn-danger")
           $('#stop').addClass("btn-success")
           clearInterval(progress);
+          var profit = $placementAmount * 2
+          $('#profit').text(profit)
+          
           $.ajax({
             method: "post",
             url: "/refresh_fd_rates",
@@ -142,23 +157,26 @@
             }
           });
         }
-      },50)
-
-      timer = setInterval(function(){
-        count-=1;
-        displayTime();
-        if (count <= 0){
-          clearInterval(timer);
-        }
-      },1000)
-      
-      
+      },50)      
 
     });
 
     $('#stop').click(function(){
       clearInterval(progress);
-      clearInterval(timer);
+      progressbar = 0;
+      $startBalance = Number($('#start_balance').text());
+      $profitEarned = Number($('#profit').text());
+      var newBalance = $startBalance + $profitEarned;
+      $('#start_balance').text(newBalance);
+      $('#profit').text(0);
+      $('#amount_placed').text(0);
+      $('.progress-bar').text(progressbar+"%")
+      $('.progress-bar').attr("style", "width:"+progressbar+"%")
+      $('#start').removeAttr('disabled')
+      $('input').removeAttr('disabled')
+      $('#stop').attr('disabled', 'true')
+      $('#stop').removeClass('btn-success')
+      $('#stop').addClass('btn-danger')
     });
 
 
