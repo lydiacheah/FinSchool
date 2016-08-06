@@ -47,58 +47,57 @@
 
 
  <div class="row slideanim">
-   <div class="col-sm-4 col-xs-12">
+   <div class="col-sm-4 col-xs-12" id="3months">
      <div class="panel panel-default text-center">
         <div class="jumbotron">
    			<h1>3 Months</h1> 
   		</div>
-  		<h2 id="3months"><%= "Rate : #{@initial_fixed_deposit_rates[0]}%" %></h2>
+  		<h2>Rate : <span></span>%</h2>
      </div>
    </div>
 
 
   
-   <div class="col-sm-4 col-xs-12">
+   <div class="col-sm-4 col-xs-12" id="6months">
      <div class="panel panel-default text-center">
         <div class="jumbotron">
    			<h1>6 Months</h1> 
   		</div>
-  		<h2 id="6months"><%= "Rate : #{@initial_fixed_deposit_rates[1]}%" %></h2>
+  		<h2>Rate : <span></span>%</h2>
      </div>
    </div>
 
 
  
-   <div class="col-sm-4 col-xs-12">
+   <div class="col-sm-4 col-xs-12" id="9months">
      <div class="panel panel-default text-center">
         <div class="jumbotron">
    			<h1>9 Months</h1> 
   		</div>
-  		<h2 id="9months"><%= "Rate : #{@initial_fixed_deposit_rates[2]}%" %></h2>
+  		<h2>Rate : <span></span>%</h2>
      </div>
    </div>
  </div>
 
+ <div id="status">
+   <p>Current Balance : <span id="start_balance"><%= current_user_active_profile.current_balance %></span></p>
+   <p>Amount Placed : <span id="amount_placed">0</span></p>
+   <p>Interest Rate : <span id="interest_rate">0</span>%</p>
+   <p>Profit Earned : <span id="profit">0</span></p>
+ </div>
 
 	<div class="form-group">
-       <input type="integer">
-       <input type="submit" value="Deposit">
-    </div>
-
-
-
-<button>Button</button>
-<button id="start">Start</button>
-<button id="stop">Stop</button>
-
-<br><br>
-
-<div class="container">
-  <div class="progress progress-striped">
-    <div class="progress-bar progress-bar-success" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
-    </div>
+      <input type="hidden" id="user_profile" user-id="<%= get_current_user_profile_path %>">
+      <input id="user_amount" type="number" min="1" max="<%= current_user_active_profile.current_balance %>" autocomplete="off" placeholder="0.00"/>
+      <button id="place" class="btn btn-primary">Place Deposit</button>
+      <button id="withdraw" class="btn btn-danger">Uplift Deposit</button>
   </div>
-</div>
+
+  
+  <div class="progress">
+    <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width:0%;"></div>
+  </div>
+  
 
 
 
@@ -106,77 +105,192 @@
 <script type="text/javascript">
   $(document).ready(function(){
 
-    $('button').click(function(){
-      
-    });
-
-    var timer = null;
     var progress = null;
-    var count = 10;
     var progressbar = 0;
 
-    function displayTime(){
-      var min = Math.floor((count / 60) % 60)
-      var sec = count % 60
-      $('#time').text(min+':'+sec);
+    $interestRate = 0;
+    $progressRate = 0;
+    $startAmount = 0;
+    $endAmount = 0;
+    $months = 0;
+
+    $('#place').attr('disabled', 'true');
+    $('#withdraw').attr('disabled', 'true');
+    $('#user_amount').removeAttr('disabled');
+
+    $('#user_amount').on('input change blur', function(){
+      var startBalance = Number($('#start_balance').text());
+      var placementAmount = $('#user_amount').val();
+      if (placementAmount > startBalance || placementAmount == 0 || $interestRate == 0){
+        $('#place').attr('disabled', 'true');
+      }else{
+        $('#place').removeAttr('disabled');
+      }
+    });
+      
+    $('#3months').click(function(){
+      $progressRate = 150;
+      $interestRate = $rate1;
+      $months = 3;
+      $(this).css("border", "1px red solid");
+      $('#6months').css("border", "");
+      $('#9months').css("border", "");
+      if ($('user_amount').val() != 0 && progressbar == 0){
+        $('#place').removeAttr('disabled');
+      }
+    })
+
+    $('#6months').click(function(){
+      $progressRate = 300;
+      $interestRate = $rate2;
+      $months = 6;
+      $(this).css("border", "1px red solid");
+      $('#3months').css("border", "");
+      $('#9months').css("border", "");
+      if ($('user_amount').val() != 0 && progressbar == 0){
+        $('#place').removeAttr('disabled');
+      }
+    })
+
+    $('#9months').click(function(){
+      $progressRate = 450;
+      $interestRate = $rate3;
+      $months = 9;
+      $(this).css("border", "1px red solid");
+      $('#3months').css("border", "");
+      $('#6months').css("border", "");
+      if ($('user_amount').val() != 0 && progressbar == 0){
+        $('#place').removeAttr('disabled');
+      }
+    })
+
+
+    function refreshRates(){
+      $.ajax({
+        method: "post",
+        url: "/refresh_fd_rates",
+        beforeSend: function(xhr){xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
+        dataType: "json",
+        success: function(data){
+          $('#3months span').text(data[0]);
+          $('#6months span').text(data[1]);
+          $('#9months span').text(data[2]);
+          $rate1 = data[0]
+          $rate2 = data[1]
+          $rate3 = data[2]
+        }
+      });
     }
 
-    $('#start').click(function(){
-      
-      progress = setInterval(function(){
-        progressbar += 1;
-        $('.progress-bar').attr("style", "width:"+progressbar+"%")
-        $('.progress-bar').text(progressbar+"%")
-        if (progressbar >= 100){
-          $('.progress-bar').addClass("progress-bar-success")
-          clearInterval(progress);
-          $.ajax({
-            method: "post",
-            url: "/refresh_fd_rates",
-            beforeSend: function(xhr){xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
-            dataType: "json",
-            success: function(data){
-              $('#3months').text("Rate : "+data[0]+"%");
-              $('#6months').text("Rate : "+data[1]+"%");
-              $('#9months').text("Rate : "+data[2]+"%");
+    function saveGame(startAmount, endAmount, months, profit){
+      $.ajax({
+        method: "post",
+        url: "/transactions",
+        beforeSend: function(xhr){xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
+        data: {
+          transaction: {
+            game_id: "1",
+            start_amount: startAmount,
+            end_amount: endAmount,
+            months: months
             }
-          });
         }
-      },50)
+      });
+    }
 
-      timer = setInterval(function(){
-        count-=1;
-        displayTime();
-        if (count <= 0){
-          clearInterval(timer);
+    function update_user_profile(profit){
+      $.ajax({
+        method: "post",
+        url: $("#user_profile").attr("user-id"),
+        beforeSend: function(xhr){xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
+        data: { _method: 'PUT', current_balance: profit },
+        success: function(){
+          $('.form-group').append('<span id="msg" style="color:red;"> *Successfully uplifted</span>');
+          setTimeout(function(){$("#msg").remove()},3000);
         }
-      },1000)
-      
-      
+      });
+    }
+
+    refreshRates();
+
+    $('#place').click(function(){
+
+      $('#withdraw').removeAttr('disabled');
+      $('#place').attr('disabled', 'true');
+      $('#user_amount').attr('disabled', 'true');
+
+      var startBalance = Number($('#start_balance').text());
+      var placementAmount = $('#user_amount').val();
+      $startAmount = placementAmount;
+      var updateStartBalance = (startBalance - placementAmount).toFixed(2);
+      $('#start_balance').text(updateStartBalance);
+      $('#interest_rate').text($interestRate);
+      $('#amount_placed').text(placementAmount);
+      progress = setInterval(function(){
+        progressbar += 100/$progressRate;
+        if (progressbar > 2){
+          $('.progress-bar').attr("aria-valuenow", progressbar);
+          $('.progress-bar').text(Math.floor(progressbar)+"%");
+          $('.progress-bar').attr("style", "width:"+progressbar+"%");
+        }
+        
+        if (progressbar >= 100){
+          $('#withdraw').removeClass("btn-danger")
+          $('#withdraw').addClass("btn-success")
+          clearInterval(progress);
+          var profit = (placementAmount * (1 + $interestRate/100)).toFixed(4);
+          $('#profit').text(profit);
+          refreshRates();
+        }
+      },100)      
 
     });
 
-    $('#stop').click(function(){
+    $('#withdraw').click(function(){
       clearInterval(progress);
-      clearInterval(timer);
+      var startBalance = Number($('#start_balance').text());
+      if (progressbar < 100){
+        var placementAmount = Number($('#amount_placed').text());
+        var updateStartBalance = (startBalance + placementAmount).toFixed(2);
+        $('#start_balance').text(updateStartBalance);
+        $endAmount = $startAmount
+      }else{
+        var profitEarned = Number($('#profit').text());
+        $endAmount = profitEarned;
+        var newBalance = (startBalance + profitEarned).toFixed(2);
+        $('#start_balance').text(newBalance);
+      }
+      progressbar = 0;
+      $interestRate = 0;      
+      $('#profit').text(0);
+      $('#amount_placed').text(0);
+      $('#interest_rate').text(0);
+      $('#user_amount').val("");
+      $('.progress-bar').text(progressbar+"%");
+      $('.progress-bar').attr("style", "width:"+progressbar+"%");
+      $('#user_amount').removeAttr('disabled');
+      $('#withdraw').attr('disabled', 'true');
+      $('#place').attr('disabled', 'true');
+      $('#withdraw').removeClass('btn-success');
+      $('#withdraw').addClass('btn-danger');
+      $('#3months').css("border", "");
+      $('#6months').css("border", "");
+      $('#9months').css("border", "");
+      $profit = ($endAmount - $startAmount).toFixed(2);
+      saveGame($startAmount, $endAmount, $months);
+      update_user_profile($profit);
+      $startAmount = 0;
+      $endAmount = 0;
+      $months = 0;
+      $profit = 0;
+
     });
 
-
-    
-
-
-
-    
     
   });
 </script>
 
 
-<div class="form-group">
-        <input type="submit" value="Progress Bar">
-        <input type="submit" value="Re-invest">
-        <input type="submit" value="Sell">
-      </div>
     <br>
 
 <div class="panel panel-default">

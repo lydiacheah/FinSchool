@@ -1,15 +1,15 @@
-<%= form_for @user do |form| %>
-	<%= form.label :email %>
-	<br>
-  <%= form.text_field :email, type: 'email' %>
-
-	<%= form.label "How shall we address you?" %>
-	<br>
-	<%= form.text_field :nickname %>
-
-	<%= form.label :birthday %>
-  <br>
-  <%= form.date_field :birthday %>
-
-  <%= form.submit %>
-<% end %>
+<div class="sign-up-questions">
+	<%= form_for @user do |form| %>
+		<div id="nickname-question">
+			<p>How shall we address you?</p>
+			<%= form.text_field :nickname %>
+			<button type="button" class="btn btn-link" id="sign-up-continue">></button>
+		</div>
+		<div id="birthday-question">
+			<p>When is your birthday?</p>
+			<%= form.date_field :birthday, id: "birthday-input" %>
+			<br>
+			<%= form.submit "start" %>
+		</div>
+	<% end %> 
+</div>
