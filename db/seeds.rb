@@ -8,3 +8,6 @@
 
 @user = User.find_by_email("haha@haha.com")
 @user.profiles.create(financial_goal: 1000, current_balance: 100)
+@game1 = Game.create(name: "fixed deposit")
+@game2 = Game.create(name: "unit trust")
+@game3 = Game.create(name: "stock")
