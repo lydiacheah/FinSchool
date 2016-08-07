@@ -106,6 +106,7 @@
 
   <div id="holdings_summary">
   <h2>Summary of your unit trust holdings</h2>
+    <input type="hidden" id="user_profile" user-id="<%= get_current_user_profile_path %>">
     <table class="table">
       <thead>
         <tr>
@@ -223,11 +224,15 @@
     });
 
     $(document).on('click', 'button.sell', function(){
-      var thisRow         = $(this).closest('tr');
-      var thisOriginalNav = thisRow.children('td:eq(3)').text();
-      var thisMarketNav   = thisRow.children('td:eq(4)').text();
-      var thisNumOfMonths = thisRow.children('td:eq(5)').text();
-      alert(thisOriginalNav+" "+thisMarketNav+" "+thisNumOfMonths);
+      $thisRow            = $(this).closest('tr');
+      var thisOriginalNav = $thisRow.children('td:eq(3)').text();
+      var thisMarketNav   = $thisRow.children('td:eq(4)').text();
+      var thisProfit      = $thisRow.children('td:eq(5)').text();
+      var thisNumOfMonths = $thisRow.children('td:eq(6)').text();
+      var profitEarned    = (Number(thisMarketNav) - Number(thisOriginalNav)).toFixed(2);
+      saveTransaction(thisOriginalNav, thisMarketNav, thisNumOfMonths);
+      update_user_profile(profitEarned);
+      //$thisRow.remove();
     });
 
     function updateStatusTable(rate){
@@ -258,6 +263,8 @@
           $('#ut_nav1').text(data[0]);
           $('#ut_nav2').text(data[1]);
           $('#ut_nav3').text(data[2]);
+
+          // update user holdings summary based on new rates
           var tbody = $('#holdings_summary table tbody tr');
           tbody.each(function(){
             var thisFund        = $(this).children('td:eq(1)').text();
@@ -285,6 +292,39 @@
         }
       });
     } // function refreshRates
+
+    function saveTransaction(startAmount, endAmount, months){
+      $.ajax({
+        method: "post",
+        url: "/transactions",
+        beforeSend: function(xhr){xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
+        data: {
+          transaction: {
+            game_id: "2",
+            start_amount: startAmount,
+            end_amount: endAmount,
+            months: months
+            }
+        },
+        success: function(){
+          var currentBalance = $('#current_balance');
+          var updatedCurrentBalance = (Number(currentBalance.text()) + Number(endAmount)).toFixed(2);
+          currentBalance.text(updatedCurrentBalance);
+        }
+      });
+    }
+
+    function update_user_profile(profit){
+      $.ajax({
+        method: "post",
+        url: $("#user_profile").attr("user-id"),
+        beforeSend: function(xhr){xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
+        data: { _method: 'PUT', current_balance: profit },
+        success: function(){
+          $thisRow.remove();
+        }
+      });
+    }
 
     initialize();
     refreshRates();
