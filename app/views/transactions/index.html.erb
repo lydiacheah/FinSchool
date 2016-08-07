@@ -1,0 +1,23 @@
+<div class="container">
+  <h1>Summary of transactions done by user</h1>
+</div>
+
+<div class="container">
+  <h3>
+	<li>Game ID: <%= @user_transaction.game_id %></li>
+	<li>Profile ID: <%= @user_transaction.profile_id %></li>
+	<li>Start Amount: RM <%= @user_transaction.start_amount %></li>
+	<li>End Amount: RM <%= @user_transaction.end_amount %></li>
+	<li>Months: <%= @user_transaction.months %></li>
+  </h3>
+</div>
+
+<div class="container">
+  <div class="panel panel-default">
+    <div class="panel-body">
+	  <li>Current user's financial goal: RM <%= @profile.financial_goal %></li>
+	  <li>Current user's current balance: RM <%= @profile.current_balance %></li>
+	</div>
+  </div>
+</div>
+

@@ -9,6 +9,8 @@ class TransactionsController < ApplicationController
 	def show
 	end
 	def index
+		@user_transaction = Transaction.last
+		@profile = Profile.find_by(user_id: current_user.id)
 	end
 
 	private
