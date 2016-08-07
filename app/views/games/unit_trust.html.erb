@@ -173,7 +173,7 @@
     });
     $('#fundC').click(function(){
       $(this).css("border", "1px red solid");
-      $selectedFund = 'Fund B';
+      $selectedFund = 'Fund C';
       updateStatusTable(Number($('#ut_nav3').text()));
       $('#fundA').css("border", "");
       $('#fundB').css("border", "");
@@ -207,11 +207,19 @@
                             '<td class="text-right">'+marketNav+'</td>'+
                             '<td class="text-right">'+profitLoss+'</td>'+
                             '<td class="text-center">'+numOfMonthsHeld+'</td>'+
-                            '<td><button class="btn btn-danger btn-block">Sell</button></td>'
+                            '<td><button class="btn btn-danger btn-block sell">Sell</button></td>'
         )
       var updatedCurrentBalance = (Number($('#current_balance').text()) - originalNav).toFixed(2);
       $('#current_balance').text(updatedCurrentBalance);
       initialize();
+    });
+
+    $(document).on('click', 'button.sell', function(){
+      var thisRow         = $(this).closest('tr');
+      var thisOriginalNav = thisRow.children('td:eq(3)').text();
+      var thisMarketNav   = thisRow.children('td:eq(4)').text();
+      var thisNumOfMonths = thisRow.children('td:eq(5)').text();
+      alert(thisOriginalNav+" "+thisMarketNav+" "+thisNumOfMonths);
     });
 
     function updateStatusTable(rate){
