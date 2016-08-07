@@ -37,6 +37,6 @@ Rails.application.routes.draw do
 
   # Profile routes
   resources :profiles, except: [:edit, :destroy]
-  post '/get_user_profile_id' => 'profiles#get_user_profile_id'
+  
 
 end
