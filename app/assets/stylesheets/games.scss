@@ -49,6 +49,20 @@ body {
 
 
 /* Unit Trust Game CSS */
+/* to remove top table border of the buy button */
 #buy_btn{
 	border-top: 0;
+}
+
+/* auto row numbering for table */
+#holdings_summary table {
+    counter-reset: rowNumber;
+}
+
+#holdings_summary table tbody tr{
+    counter-increment: rowNumber;
+}
+
+#holdings_summary table tbody tr td:first-child::before {
+    content: counter(rowNumber);
 }

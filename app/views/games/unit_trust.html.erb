@@ -96,25 +96,22 @@
     </table>
   </div>
 
-    
-
-
   <div id="holdings_summary">
   <h2>Summary of your unit trust holdings</h2>
     <table class="table">
       <thead>
         <tr>
           <th>#</th>
-          <th>Fund</th>
-          <th>Unit</th>
-          <th>Original NAV</th>
-          <th>Market NAV</th>
-          <th>Profit/(Loss)</th>
-          <th>No. of Months held</th>
-          <th></th>
+          <th class="col-xs-1 col-sm-1 col-md-1 col-lg-1">Fund</th>
+          <th class="col-xs-1 col-sm-1 col-md-1 col-lg-1 text-right">Unit</th>
+          <th class="col-xs-2 col-sm-2 col-md-2 col-lg-2 text-right">Original NAV</th>
+          <th class="col-xs-2 col-sm-2 col-md-2 col-lg-2 text-right">Market NAV</th>
+          <th class="col-xs-2 col-sm-2 col-md-2 col-lg-2 text-right">Profit/(Loss)</th>
+          <th class="col-xs-2 col-sm-2 col-md-2 col-lg-2 text-center">No. of Months held</th>
+          <th class="col-xs-2 col-sm-2 col-md-2 col-lg-2"></th>
         </tr>
-      </thead> 
-      
+      </thead>
+      <tbody></tbody>
     </table>
   </div> 
   
@@ -145,24 +142,38 @@
 <script type="text/javascript">
   $(document).ready(function(){
 
-    // initialiaztion of buy button
-    $('#buy').attr('disabled', 'true');
+    $selectedFund = null;
 
+    // initialiaztion of buy button
+    function initialize(){
+      $('#buy').attr('disabled', 'true');
+      $('#fundA').css("border", "");
+      $('#fundB').css("border", "");
+      $('#fundC').css("border", "");
+      $('#qty').val("");
+      $('#qty').attr("placeholder", "Maximum unit can be bought:")
+      $('#selected_nav').text(0.00);
+      $('#selected_total').text(0.00);
+      $selectedFund = null;
+    }
     // fund selection display
     $('#fundA').click(function(){
       $(this).css("border", "1px red solid");
+      $selectedFund = 'Fund A';
       updateStatusTable(Number($('#ut_nav1').text()));
       $('#fundB').css("border", "");
       $('#fundC').css("border", "");
     });
     $('#fundB').click(function(){
       $(this).css("border", "1px red solid");
+      $selectedFund = 'Fund B';
       updateStatusTable(Number($('#ut_nav2').text()));
       $('#fundA').css("border", "");
       $('#fundC').css("border", "");
     });
     $('#fundC').click(function(){
       $(this).css("border", "1px red solid");
+      $selectedFund = 'Fund B';
       updateStatusTable(Number($('#ut_nav3').text()));
       $('#fundA').css("border", "");
       $('#fundB').css("border", "");
@@ -181,6 +192,27 @@
           $('#buy').removeAttr('disabled');
         }
     })
+
+    $('#buy').click(function(){
+      var tableBody = $('#holdings_summary table tbody');
+      var unit = $('#qty').val();
+      var originalNav = (Number($('#selected_nav').text()) * unit).toFixed(2); 
+      var marketNav = originalNav;
+      var profitLoss = "0.00";
+      var numOfMonthsHeld = 0;
+      tableBody.append('<tr><td></td>'+
+                            '<td>'+$selectedFund+'</td>'+
+                            '<td class="text-right">'+unit+'</td>'+
+                            '<td class="text-right">'+originalNav+'</td>'+
+                            '<td class="text-right">'+marketNav+'</td>'+
+                            '<td class="text-right">'+profitLoss+'</td>'+
+                            '<td class="text-center">'+numOfMonthsHeld+'</td>'+
+                            '<td><button class="btn btn-danger btn-block">Sell</button></td>'
+        )
+      var updatedCurrentBalance = (Number($('#current_balance').text()) - originalNav).toFixed(2);
+      $('#current_balance').text(updatedCurrentBalance);
+      initialize();
+    });
 
     function updateStatusTable(rate){
 
@@ -217,6 +249,7 @@
       });
     } // function refreshRates
 
+    initialize();
     refreshRates();
 
   }); //document ready
