@@ -64,6 +64,14 @@
 
   <br>
 
+  <div class="progress">
+    <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width:0%;"></div>
+  </div>
+
+  <button id="start">Start</button>
+  <button id="stop">Stop</button>
+  <br>
+
 	<div class="status">
     <table class="table">
       <thead>
@@ -194,11 +202,11 @@
     })
 
     $('#buy').click(function(){
-      var tableBody = $('#holdings_summary table tbody');
-      var unit = $('#qty').val();
-      var originalNav = (Number($('#selected_nav').text()) * unit).toFixed(2); 
-      var marketNav = originalNav;
-      var profitLoss = "0.00";
+      var tableBody       = $('#holdings_summary table tbody');
+      var unit            = $('#qty').val();
+      var originalNav     = (Number($('#selected_nav').text()) * unit).toFixed(2); 
+      var marketNav       = originalNav;
+      var profitLoss      = "0.00";
       var numOfMonthsHeld = 0;
       tableBody.append('<tr><td></td>'+
                             '<td>'+$selectedFund+'</td>'+
@@ -250,15 +258,58 @@
           $('#ut_nav1').text(data[0]);
           $('#ut_nav2').text(data[1]);
           $('#ut_nav3').text(data[2]);
-          $rate1 = data[0]
-          $rate2 = data[1]
-          $rate3 = data[2]
+          var tbody = $('#holdings_summary table tbody tr');
+          tbody.each(function(){
+            var thisFund        = $(this).children('td:eq(1)').text();
+            var thisUnit        = Number($(this).children('td:eq(2)').text());
+            var thisOriginalNav = Number($(this).children('td:eq(3)').text());
+            var thisRate        = $(this).children('td:eq(4)');
+            var thisProfit      = $(this).children('td:eq(5)');
+            var thisMonth       = $(this).children('td:eq(6)');
+            switch(thisFund){
+              case "Fund A":
+                var newValue = (thisUnit * data[0]).toFixed(2);
+                break;
+              case "Fund B":
+                var newValue = (thisUnit * data[1]).toFixed(2);
+                break;
+              case "Fund C":
+                var newValue = (thisUnit * data[2]).toFixed(2);
+            }
+            var updatedProfit = (newValue - thisOriginalNav).toFixed(2);
+            var updatedMonth = Number(thisMonth.text()) + 1;
+            thisProfit.text(updatedProfit);
+            thisMonth.text(updatedMonth);
+            thisRate.text(newValue);
+          })
         }
       });
     } // function refreshRates
 
     initialize();
     refreshRates();
+
+    var progressbar = 0
+    var timer = null
+    $('#start').click(function(){
+      timer = setInterval(function(){
+        progressbar += 1;
+        if (progressbar > 2){
+            $('.progress-bar').attr("aria-valuenow", progressbar);
+            $('.progress-bar').text(Math.floor(progressbar)+"%");
+            $('.progress-bar').attr("style", "width:"+progressbar+"%");
+        }
+        if (progressbar >= 100){
+            refreshRates();
+            progressbar = 0;
+          }
+      },100)
+    })
+
+    $('#stop').click(function(){
+      clearInterval(timer);
+    })
+    
 
   }); //document ready
 </script>
