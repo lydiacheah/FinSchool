@@ -31,48 +31,92 @@
 
 
  <div class="row slideanim">
-   <div class="col-sm-4 col-xs-12">
+   <div class="col-sm-4 col-xs-12" id="fundA">
      <div class="panel panel-default text-center">
        <div class="jumbotron">
    		   <h1>Fund A</h1> 
   		 </div>
 		     <h2> Potential Yield: 3% - 5% </h2>
-  		   <h2> Current NAV: RM 0.90 </h2>
+  		   <h2> Current NAV: RM <span id="ut_nav1"></span></h2>
      </div>
    </div>
   
-   <div class="col-sm-4 col-xs-12">
+   <div class="col-sm-4 col-xs-12" id="fundB">
      <div class="panel panel-default text-center">
         <div class="jumbotron">
    			<h1>Fund B</h1> 
   		</div>
     <h2> Potential Yield: 4% - 8% </h2>
-      <h2> Current NAV: RM 0.30 </h2>
+      <h2> Current NAV: RM <span id="ut_nav2"></span></h2>
      </div>
    </div>
  
-   <div class="col-sm-4 col-xs-12">
+   <div class="col-sm-4 col-xs-12" id="fundC">
      <div class="panel panel-default text-center">
         <div class="jumbotron">
-   			<h1>Fund C</h1> 
-  		</div>
-    <h2> Potential Yield: 5% - 10% </h2>
-      <h2> Current NAV: RM 0.25 </h2>
+   			  <h1>Fund C</h1> 
+  		  </div>
+        <h2> Potential Yield: 5% - 10% </h2>
+        <h2>Current NAV : RM <span id="ut_nav3"></span></h2>
      </div>
    </div>
  </div>
 
+  <br>
 
-	<div class="form-group">
-       <input type="integer">
-       <input type="submit" value="Deposit">
-    </div>
-      <div class="form-group">
-        <input type="submit" value="Progress Bar">
-        <input type="submit" value="Re-invest">
-        <input type="submit" value="Sell">
-      </div>
-    <br>
+	<div class="status">
+    <table class="table">
+      <thead>
+        <th class="col-xs-2 col-sm-2 col-md-2 col-lg-2 text-center">Unit</th>
+        <th class="col-xs-1 col-sm-1 col-md-1 col-lg-1"></th>
+        <th class="col-xs-2 col-sm-2 col-md-2 col-lg-2">Per Unit NAV</th>
+        <th class="col-xs-1 col-sm-1 col-md-1 col-lg-1"></th>
+        <th class="col-xs-2 col-sm-2 col-md-2 col-lg-2">Total</th>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="text-center"><input type="number" class="form-control" id="qty" autocomplete="off" placeholder="Maximum unit can be bought:" /></td>
+          <td class="text-center">x</td>
+          <td id="selected_nav">0.00</td>
+          <td class="text-center">=</td>
+          <td id="selected_total">0.00</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <td><strong>Current Balance<strong></td>
+          <td class="text-center">=</td>
+          <td id="current_balance"><%= current_user_active_profile.current_balance %></td>
+        </tr>
+        <tr>
+          <td id="buy_btn"><button class="btn btn-primary btn-block" id="buy"> Buy </button></td>
+        </tr>
+       
+      </tbody>
+    </table>
+  </div>
+
+    
+
+
+  <div id="holdings_summary">
+  <h2>Summary of your unit trust holdings</h2>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Fund</th>
+          <th>Unit</th>
+          <th>Original NAV</th>
+          <th>Market NAV</th>
+          <th>Profit/(Loss)</th>
+          <th>No. of Months held</th>
+          <th></th>
+        </tr>
+      </thead> 
+      
+    </table>
+  </div> 
   
 
   <h3>
@@ -92,10 +136,88 @@
     Annualized rate of return <strong>-31.81%</strong> <br>
   </h3>
 
-
-
     <strong>Gains From Investment:</strong><br>
     Dividend announce is: <strong>0.0246</strong> <br>
     With the dividend obtained, total units now is: <strong>3708.87</strong> <br>
     <br>
 </div>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+
+    // initialiaztion of buy button
+    $('#buy').attr('disabled', 'true');
+
+    // fund selection display
+    $('#fundA').click(function(){
+      $(this).css("border", "1px red solid");
+      updateStatusTable(Number($('#ut_nav1').text()));
+      $('#fundB').css("border", "");
+      $('#fundC').css("border", "");
+    });
+    $('#fundB').click(function(){
+      $(this).css("border", "1px red solid");
+      updateStatusTable(Number($('#ut_nav2').text()));
+      $('#fundA').css("border", "");
+      $('#fundC').css("border", "");
+    });
+    $('#fundC').click(function(){
+      $(this).css("border", "1px red solid");
+      updateStatusTable(Number($('#ut_nav3').text()));
+      $('#fundA').css("border", "");
+      $('#fundB').css("border", "");
+    }); // fund selection display
+
+    // to update the total on input after the user has selected the desired fund
+    $('#qty').on('input change blur', function(){
+        var value = ($(this).val() * Number($('#selected_nav').text())).toFixed(2);
+        $('#selected_total').text(value);
+
+        // to enable / disable buy button depending on the user's current balance
+        var current_balance = Number($('#current_balance').text());
+        if (value == 0 || value > current_balance){
+          $('#buy').attr('disabled', 'true');
+        }else if (value <= current_balance){
+          $('#buy').removeAttr('disabled');
+        }
+    })
+
+    function updateStatusTable(rate){
+
+      // updatating of table info based on the user's selected fund
+      $('#selected_nav').text(rate);
+
+      // processing of total value to be displayed on the table
+      var selectedQty = $('#qty').val();
+      var total = (rate * selectedQty).toFixed(2);
+      $('#selected_total').text(total);
+
+      // processing of numbers of unit buyable given the user's current balance to be displayed on the table
+      var current_balance = Number($('#current_balance').text());
+      var unitBuyable = Math.floor(current_balance/rate);
+      $('#qty').attr("placeholder", "Maximum unit can be bought: "+unitBuyable);
+            
+    } // updateStatusTable
+
+    // initialization/re-initialization of fund rates
+    function refreshRates(){
+      $.ajax({
+        method: "post",
+        url: "/refresh_ut_rates",
+        beforeSend: function(xhr){xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
+        dataType: "json",
+        success: function(data){
+          $('#ut_nav1').text(data[0]);
+          $('#ut_nav2').text(data[1]);
+          $('#ut_nav3').text(data[2]);
+          $rate1 = data[0]
+          $rate2 = data[1]
+          $rate3 = data[2]
+        }
+      });
+    } // function refreshRates
+
+    refreshRates();
+
+  }); //document ready
+</script>
