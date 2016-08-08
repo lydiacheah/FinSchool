@@ -29,7 +29,14 @@ Rails.application.routes.draw do
 
   # Games rate refresher routes
   post '/refresh_fd_rates' => 'games#refresh_fixed_depoits_rates'
-  post '/refresh_ut_rates' => 'gameses#refresh_unit_trust_rates'
+  post '/refresh_ut_rates' => 'games#refresh_unit_trust_rates'
   post '/refresh_s_rates' => 'games#refresh_stock_rates'
+
+  # Transaction routes
+  resources :transactions, only: [:create, :show, :index]
+
+  # Profile routes
+  resources :profiles, except: [:edit, :destroy]
+  
 
 end

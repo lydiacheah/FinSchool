@@ -29,6 +29,13 @@ body {
 	color: #404040;
 }
 
+label {
+	color: #565a5c;
+	font-size: 1.1em;
+	font-weight: 500;
+	margin-bottom: 10px;
+}
+
 .font_awesome {
 	margin-left: 100px;
 }
@@ -40,9 +47,48 @@ body {
 
 .preview {
 	font-size: 20px;
-	color: #9babb9;
+	color: black;
 }
 
 .preview:hover, .preview:focus {
 	text-decoration: none;
+	color: #9babb9;
+	cursor: pointer;
 }
+
+
+
+
+.panel-heading:hover img{
+	margin-top: -5px;
+}
+
+
+
+.jumbotron {
+	width: 60%;
+	position: center;
+	margin: 20px auto;
+}
+
+
+
+/* Unit Trust Game CSS */
+/* to remove top table border of the buy button */
+#buy_btn{
+	border-top: 0;
+}
+
+/* auto row numbering for table */
+#holdings_summary table {
+    counter-reset: rowNumber;
+}
+
+#holdings_summary table tbody tr{
+    counter-increment: rowNumber;
+}
+
+#holdings_summary table tbody tr td:first-child::before {
+    content: counter(rowNumber);
+}
+
