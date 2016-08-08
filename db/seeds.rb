@@ -6,7 +6,7 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-@user = User.find_by_email("haha@haha.com")
+@user = User.first
 @user.profiles.create(financial_goal: 1000, current_balance: 100)
 @game1 = Game.create(name: "fixed deposit")
 @game2 = Game.create(name: "unit trust")
