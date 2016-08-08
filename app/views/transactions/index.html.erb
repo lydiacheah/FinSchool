@@ -1,6 +1,7 @@
 <div class="container">
-  <h1>Summary of transactions done by user</h1>
-</div>
+  
+  		<h1>Summary of transactions done by user</h1>
+
 
 <div class="container">
   <h3>
@@ -21,3 +22,16 @@
   </div>
 </div>
 
+  <!-- Pie Chart -->
+  <div class="col-xs-6">
+    <h3>Activities by Game ID</h3>
+    <%= pie_chart @for_chart.group(:game_id).count %>
+  </div>
+
+    <!-- Line Chart - Single Series -->
+  <div class="col-xs-6">
+    <h3>Visits By Day</h3>
+    <%= line_chart @for_chart.group_by_day(:created_at, format: "%B %d, %Y").count, discrete: true %>
+  </div>
+
+</div>

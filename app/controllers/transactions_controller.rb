@@ -11,6 +11,7 @@ class TransactionsController < ApplicationController
 	def index
 		@user_transaction = Transaction.last
 		@profile = Profile.find_by(user_id: current_user.id)
+		@for_chart = Transaction.all
 	end
 
 	private
