@@ -56,45 +56,45 @@
 
   <div class="row">
     <!-- Financial Sector -->    
-    <div class="col-md-4">
+    <div class="col-md-4" id="s1">
       <div class="panel panel-default preview">
         <div class="panel-heading">
           <img src=<%= asset_path 'financialsector.png' %> alt="Financial Sector" class="img-thumbnail">
         </div>
         <div class="panel-body text-center">
           <h3>Finance Sector</h3>
-          <p>Volatility:</p>
-          <p>Historical Return:</p>
+          <p>-8% < Potential Yield < +20% </p>
+          <p>Current Price: <span id="s_price1"></span></p>
         </div>
       </div>
     </div>
       
 
     <!-- Construction Sector -->  
-    <div class="col-md-4">
+    <div class="col-md-4" id="s2">
       <div class="panel panel-default preview">
         <div class="panel-heading">
           <img src=<%= asset_path 'constructionsector.png' %> alt="Construction Sector" class="img-thumbnail">
         </div>
         <div class="panel-body text-center">
           <h3>Construction Sector</h3>
-          <p>Volatility:</p>
-          <p>Historical Return:</p>
+          <p>-5% < Potential Yield < +25% </p>
+          <p>Current Price: <span id="s_price2"></span></p>
         </div>
       </div>
     </div>  
    
 
     <!-- Plantation Sector -->    
-    <div class="col-md-4">
+    <div class="col-md-4" id="s3">
       <div class="panel panel-default preview">
         <div class="panel-heading">
           <img src=<%= asset_path 'plantationsector.png' %> alt="Plantation Sector" class="img-thumbnail">
         </div>
         <div class="panel-body text-center">
           <h3>Plantation Sector</h3>
-          <p>Volatility:</p>
-          <p>Historical Return:</p>
+         <p>-7% < Potential Yield < +10% </p>
+          <p>Current Price: <span id="s_price3"></span></p>
         </div>
       </div>
     </div>    
@@ -103,45 +103,45 @@
 
   <div class="row">
     <!-- Production Sector -->    
-    <div class="col-md-4">
+    <div class="col-md-4" id="s4">
       <div class="panel panel-default preview">
         <div class="panel-heading">
           <img src=<%= asset_path 'consumerproduct.png' %> alt="Consumer Product Sector" class="img-thumbnail">
         </div>
         <div class="panel-body text-center">
           <h3>Consumer Product Sector</h3>
-          <p>Volatility:</p>
-          <p>Historical Return:</p>
+          <p>-15% < Potential Yield < +30% </p>
+          <p>Current Price: <span id="s_price4"></span></p>
         </div>
       </div>
     </div>
     
   
     <!-- Technology Secotr -->    
-    <div class="col-md-4">
+    <div class="col-md-4" id="s5">
       <div class="panel panel-default preview">
         <div class="panel-heading">
           <img src=<%= asset_path 'technologysector.png' %> alt="Technology Sector" class="img-thumbnail">
         </div>
         <div class="panel-body text-center">
           <h3>Technology Sector</h3>
-          <p>Volatility:</p>
-          <p>Historical Return:</p>
+          <p>-10% < Potential Yield < +18% </p>
+          <p>Current Price: <span id="s_price5"></span></p>
         </div>
       </div>
     </div>
   
     
     <!-- Property Secotr -->    
-    <div class="col-md-4">
+    <div class="col-md-4" id="s6">
       <div class="panel panel-default preview">
         <div class="panel-heading">
           <img src=<%= asset_path 'propertysector.png' %> alt="Properties Sector" class="img-thumbnail">
         </div>
         <div class="panel-body text-center">
           <h3>Properties Sector</h3>
-          <p>Volatility:</p>
-          <p>Historical Return:</p>
+          <p>-10% < Potential Yield < +21% </p>
+          <p>Current Price: <span id="s_price6"></span></p>
         </div>
       </div>
     </div>    
@@ -150,51 +150,445 @@
 
   <div class="row">
     <!-- Trading/Service Sector -->    
-    <div class="col-md-4">
+    <div class="col-md-4" id="s7">
       <div class="panel panel-default preview">
         <div class="panel-heading">
           <img src=<%= asset_path 'trading_service_sector.png' %> alt="Trading/Service Sector" class="img-thumbnail">
         </div>
         <div class="panel-body text-center">
-          <h3>Tading/Service Sector</h3>
-          <p>Volatility:</p>
-          <p>Historical Return:</p>
+          <h3>Trading/Service Sector</h3>
+          <p>-25% < Potential Yield < +25% </p>
+          <p>Current Price: <span id="s_price7"></span></p>
         </div>
       </div>
     </div>
     
 
     <!-- Utilities Sector -->    
-    <div class="col-md-4">
+    <div class="col-md-4" id="s8">
       <div class="panel panel-default preview">
         <div class="panel-heading">
           <img src=<%= asset_path 'utilitiessector.png' %> alt="Utilities Sector" class="img-thumbnail">
         </div>
         <div class="panel-body text-center">
           <h3>Utilities Sector</h3>
-          <p>Volatility:</p>
-          <p>Historical Return:</p>
+          <p>-10% < Potential Yield < +30% </p>
+          <p>Current Price: <span id="s_price8"></span></p>
         </div>
       </div>
     </div>
     
     
     <!-- Healthcare Sector -->    
-    <div class="col-md-4">
+    <div class="col-md-4" id="s9">
       <div class="panel panel-default preview">
         <div class="panel-heading">
           <img src=<%= asset_path 'healthcare_sector.png' %> alt="Healthcare Sector" class="img-thumbnail">
         </div>
         <div class="panel-body text-center">
           <h3>Healthcare Sector</h3>
-          <p>Volatility:</p>
-          <p>Historical Return:</p>
+          <p>-8% < Potential Yield < +25% </p>
+          <p>Current Price: <span id="s_price9"></span></p>
         </div>
       </div>
     </div>    
   </div>
   <hr>
-</div>
 
+
+<div class="progress">
+    <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width:0%;"></div>
+  </div>
+
+  <button id="start">Start</button>
+  <button id="stop">Stop</button>
+  <br>
+
+  <div class="status">
+    <table class="table">
+      <thead>
+        <th class="col-xs-2 col-sm-2 col-md-2 col-lg-2 text-center">Unit</th>
+        <th class="col-xs-1 col-sm-1 col-md-1 col-lg-1"></th>
+        <th class="col-xs-2 col-sm-2 col-md-2 col-lg-2">Per Unit NAV</th>
+        <th class="col-xs-1 col-sm-1 col-md-1 col-lg-1"></th>
+        <th class="col-xs-2 col-sm-2 col-md-2 col-lg-2">Total</th>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="text-center"><input type="number" class="form-control" id="qty" autocomplete="off" placeholder="Maximum unit can be bought:" /></td>
+          <td class="text-center">x</td>
+          <td id="selected_stock_sector">0.00</td>
+          <td class="text-center">=</td>
+          <td id="selected_total">0.00</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <td><strong>Current Balance<strong></td>
+          <td class="text-center">=</td>
+          <td id="current_balance"><%= current_user_active_profile.current_balance %></td>
+        </tr>
+        <tr>
+          <td id="buy_btn"><button class="btn btn-primary btn-block" id="buy"> Buy </button></td>
+        </tr>
+       
+      </tbody>
+    </table>
+  </div>
+
+  <div id="holdings_summary">
+  <h2>Summary of your stock holdings</h2>
+    <input type="hidden" id="user_profile" user-id="<%= get_current_user_profile_path %>">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th class="col-xs-1 col-sm-1 col-md-1 col-lg-1">Sector</th>
+          <th class="col-xs-1 col-sm-1 col-md-1 col-lg-1 text-right">Unit</th>
+          <th class="col-xs-2 col-sm-2 col-md-2 col-lg-2 text-right">Cost</th>
+          <th class="col-xs-2 col-sm-2 col-md-2 col-lg-2 text-right">Market Value</th>
+          <th class="col-xs-2 col-sm-2 col-md-2 col-lg-2 text-right">Profit/(Loss)</th>
+          <th class="col-xs-2 col-sm-2 col-md-2 col-lg-2 text-center">No. of Months held</th>
+          <th class="col-xs-2 col-sm-2 col-md-2 col-lg-2"></th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div> 
   
 
+</div>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+
+    $selectedFund = null;
+
+    // initialiaztion of buy button
+    function initialize(){
+      $('#buy').attr('disabled', 'true');
+      $('#s1').css("border", "");
+      $('#s2').css("border", "");
+      $('#s3').css("border", "");
+      $('#s4').css("border", "");
+      $('#s5').css("border", "");
+      $('#s6').css("border", "");
+      $('#s7').css("border", "");
+      $('#s8').css("border", "");
+      $('#s9').css("border", "");
+      $('#qty').val("");
+      $('#qty').attr("placeholder", "Maximum unit can be bought:")
+      $('#selected_stock_sector').text(0.00);
+      $('#selected_total').text(0.00);
+      $selectedFund = null;
+    }
+    // fund selection display
+    $('#s1').click(function(){
+      $(this).css("border", "1px red solid");
+      $selectedFund = 'Finance';
+      updateStatusTable(Number($('#s_price1').text()));
+      $('#s2').css("border", "");
+      $('#s3').css("border", "");
+      $('#s4').css("border", "");
+      $('#s5').css("border", "");
+      $('#s6').css("border", "");
+      $('#s7').css("border", "");
+      $('#s8').css("border", "");
+      $('#s9').css("border", "");
+    });
+    $('#s2').click(function(){
+      $(this).css("border", "1px red solid");
+      $selectedFund = 'Construction';
+      updateStatusTable(Number($('#s_price2').text()));
+      $('#s1').css("border", "");
+      $('#s3').css("border", "");
+      $('#s4').css("border", "");
+      $('#s5').css("border", "");
+      $('#s6').css("border", "");
+      $('#s7').css("border", "");
+      $('#s8').css("border", "");
+      $('#s9').css("border", "");
+    });
+    $('#s3').click(function(){
+      $(this).css("border", "1px red solid");
+      $selectedFund = 'Plantation';
+      updateStatusTable(Number($('#s_price3').text()));
+      $('#s1').css("border", "");
+      $('#s2').css("border", "");
+      $('#s4').css("border", "");
+      $('#s5').css("border", "");
+      $('#s6').css("border", "");
+      $('#s7').css("border", "");
+      $('#s8').css("border", "");
+      $('#s9').css("border", "");
+    });
+    $('#s4').click(function(){
+      $(this).css("border", "1px red solid");
+      $selectedFund = 'Consumer Product';
+      updateStatusTable(Number($('#s_price4').text()));
+      $('#s1').css("border", "");
+      $('#s2').css("border", "");
+      $('#s3').css("border", "");
+      $('#s5').css("border", "");
+      $('#s6').css("border", "");
+      $('#s7').css("border", "");
+      $('#s8').css("border", "");
+      $('#s9').css("border", "");
+    });
+    $('#s5').click(function(){
+      $(this).css("border", "1px red solid");
+      $selectedFund = 'Technology';
+      updateStatusTable(Number($('#s_price5').text()));
+      $('#s1').css("border", "");
+      $('#s2').css("border", "");
+      $('#s3').css("border", "");
+      $('#s4').css("border", "");
+      $('#s6').css("border", "");
+      $('#s7').css("border", "");
+      $('#s8').css("border", "");
+      $('#s9').css("border", "");
+    });
+    $('#s6').click(function(){
+      $(this).css("border", "1px red solid");
+      $selectedFund = 'Properties';
+      updateStatusTable(Number($('#s_price6').text()));
+      $('#s1').css("border", "");
+      $('#s2').css("border", "");
+      $('#s3').css("border", "");
+      $('#s4').css("border", "");
+      $('#s5').css("border", "");
+      $('#s7').css("border", "");
+      $('#s8').css("border", "");
+      $('#s9').css("border", "");
+    });
+    $('#s7').click(function(){
+      $(this).css("border", "1px red solid");
+      $selectedFund = 'Trading/Service';
+      updateStatusTable(Number($('#s_price7').text()));
+      $('#s1').css("border", "");
+      $('#s2').css("border", "");
+      $('#s3').css("border", "");
+      $('#s4').css("border", "");
+      $('#s5').css("border", "");
+      $('#s6').css("border", "");
+      $('#s8').css("border", "");
+      $('#s9').css("border", "");
+    });
+    $('#s8').click(function(){
+      $(this).css("border", "1px red solid");
+      $selectedFund = 'Utilities';
+      updateStatusTable(Number($('#s_price8').text()));
+      $('#s1').css("border", "");
+      $('#s2').css("border", "");
+      $('#s3').css("border", "");
+      $('#s4').css("border", "");
+      $('#s5').css("border", "");
+      $('#s6').css("border", "");
+      $('#s7').css("border", "");
+      $('#s9').css("border", "");
+    });
+    $('#s9').click(function(){
+      $(this).css("border", "1px red solid");
+      $selectedFund = 'Healthcare';
+      updateStatusTable(Number($('#s_price9').text()));
+      $('#s1').css("border", "");
+      $('#s2').css("border", "");
+      $('#s3').css("border", "");
+      $('#s4').css("border", "");
+      $('#s5').css("border", "");
+      $('#s6').css("border", "");
+      $('#s7').css("border", "");
+      $('#s8').css("border", "");
+    });
+    // fund selection display
+
+    // to update the total on input after the user has selected the desired fund
+    $('#qty').on('input change blur', function(){
+        var value = ($(this).val() * Number($('#selected_stock_sector').text())).toFixed(2);
+        $('#selected_total').text(value);
+
+        // to enable / disable buy button depending on the user's current balance
+        var current_balance = Number($('#current_balance').text());
+        if (value == 0 || value > current_balance){
+          $('#buy').attr('disabled', 'true');
+        }else if (value <= current_balance){
+          $('#buy').removeAttr('disabled');
+        }
+    })
+
+    $('#buy').click(function(){
+      var tableBody       = $('#holdings_summary table tbody');
+      var unit            = $('#qty').val();
+      var Cost            = (Number($('#selected_stock_sector').text()) * unit).toFixed(2); 
+      var marketvalue       = Cost;
+      var profitLoss      = "0.00";
+      var numOfMonthsHeld = 0;
+      tableBody.append('<tr><td></td>'+
+                            '<td>'+$selectedFund+'</td>'+
+                            '<td class="text-right">'+unit+'</td>'+
+                            '<td class="text-right">'+Cost+'</td>'+
+                            '<td class="text-right">'+marketvalue+'</td>'+
+                            '<td class="text-right">'+profitLoss+'</td>'+
+                            '<td class="text-center">'+numOfMonthsHeld+'</td>'+
+                            '<td><button class="btn btn-danger btn-block sell">Sell</button></td>'
+        )
+      var updatedCurrentBalance = (Number($('#current_balance').text()) - Cost).toFixed(2);
+      $('#current_balance').text(updatedCurrentBalance);
+      initialize();
+    });
+
+    $(document).on('click', 'button.sell', function(){
+      $thisRow            = $(this).closest('tr');
+      var thisCost = $thisRow.children('td:eq(3)').text();
+      var thisMarketvalue   = $thisRow.children('td:eq(4)').text();
+      var thisProfit      = $thisRow.children('td:eq(5)').text();
+      var thisNumOfMonths = $thisRow.children('td:eq(6)').text();
+      var profitEarned    = (Number(thisMarketvalue) - Number(thisCost)).toFixed(2);
+      saveTransaction(thisCost, thisMarketvalue, thisNumOfMonths);
+      update_user_profile(profitEarned);
+      //$thisRow.remove();
+    });
+
+    function updateStatusTable(rate){
+
+      // updatating of table info based on the user's selected fund
+      $('#selected_stock_sector').text(rate);
+
+      // processing of total value to be displayed on the table
+      var selectedQty = $('#qty').val();
+      var total = (rate * selectedQty).toFixed(2);
+      $('#selected_total').text(total);
+
+      // processing of numbers of unit buyable given the user's current balance to be displayed on the table
+      var current_balance = Number($('#current_balance').text());
+      var unitBuyable = Math.floor(current_balance/rate);
+      $('#qty').attr("placeholder", "Maximum unit can be bought: "+unitBuyable);
+            
+    } // updateStatusTable
+
+    // initialization/re-initialization of fund rates
+    function refreshRates(){
+      $.ajax({
+        method: "post",
+        url: "/refresh_s_rates",
+        beforeSend: function(xhr){xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
+        dataType: "json",
+        success: function(data){
+          $('#s_price1').text(data[0]);
+          $('#s_price2').text(data[1]);
+          $('#s_price3').text(data[2]);
+          $('#s_price4').text(data[3]);
+          $('#s_price5').text(data[4]);
+          $('#s_price6').text(data[5]);
+          $('#s_price7').text(data[6]);
+          $('#s_price8').text(data[7]);
+          $('#s_price9').text(data[8]);
+
+          // update user holdings summary based on new rates
+          var tbody = $('#holdings_summary table tbody tr');
+          tbody.each(function(){
+            var thisFund        = $(this).children('td:eq(1)').text();
+            var thisUnit        = Number($(this).children('td:eq(2)').text());
+            var thisCost        = Number($(this).children('td:eq(3)').text());
+            var thisRate        = $(this).children('td:eq(4)');
+            var thisProfit      = $(this).children('td:eq(5)');
+            var thisMonth       = $(this).children('td:eq(6)');
+            switch(thisFund){
+              case "Finance":
+                var newValue = (thisUnit * data[0]).toFixed(2);
+                break;
+              case "Construction":
+                var newValue = (thisUnit * data[1]).toFixed(2);
+                break;
+              case "Plantation":
+                var newValue = (thisUnit * data[2]).toFixed(2);
+                break;
+              case "Consumer Product":
+                var newValue = (thisUnit * data[3]).toFixed(2);
+                break;
+              case "Technology":
+                var newValue = (thisUnit * data[4]).toFixed(2);
+                break;
+              case "Properties":
+                var newValue = (thisUnit * data[5]).toFixed(2);
+                break;
+              case "Trading/Service":
+                var newValue = (thisUnit * data[6]).toFixed(2);
+                break;
+              case "Utilities":
+                var newValue = (thisUnit * data[7]).toFixed(2);
+                break;
+              case "Healthcare":
+                var newValue = (thisUnit * data[8]).toFixed(2);
+                break;
+            }
+            var updatedProfit = (newValue - thisCost).toFixed(2);
+            var updatedMonth = Number(thisMonth.text()) + 1;
+            thisProfit.text(updatedProfit);
+            thisMonth.text(updatedMonth);
+            thisRate.text(newValue);
+          })
+        }
+      });
+    } // function refreshRates
+
+    function saveTransaction(startAmount, endAmount, months){
+      $.ajax({
+        method: "post",
+        url: "/transactions",
+        beforeSend: function(xhr){xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
+        data: {
+          transaction: {
+            game_id: "2",
+            start_amount: startAmount,
+            end_amount: endAmount,
+            months: months
+            }
+        },
+        success: function(){
+          var currentBalance = $('#current_balance');
+          var updatedCurrentBalance = (Number(currentBalance.text()) + Number(endAmount)).toFixed(2);
+          currentBalance.text(updatedCurrentBalance);
+        }
+      });
+    }
+
+    function update_user_profile(profit){
+      $.ajax({
+        method: "post",
+        url: $("#user_profile").attr("user-id"),
+        beforeSend: function(xhr){xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
+        data: { _method: 'PUT', current_balance: profit },
+        success: function(){
+          $thisRow.remove();
+        }
+      });
+    }
+
+    initialize();
+    refreshRates();
+
+    var progressbar = 0
+    var timer = null
+    $('#start').click(function(){
+      timer = setInterval(function(){
+        progressbar += 1;
+        if (progressbar > 2){
+            $('.progress-bar').attr("aria-valuenow", progressbar);
+            $('.progress-bar').text(Math.floor(progressbar)+"%");
+            $('.progress-bar').attr("style", "width:"+progressbar+"%");
+        }
+        if (progressbar >= 100){
+            refreshRates();
+            progressbar = 0;
+          }
+      },100)
+    })
+
+    $('#stop').click(function(){
+      clearInterval(timer);
+    })
+    
+
+  }); //document ready
+</script>
