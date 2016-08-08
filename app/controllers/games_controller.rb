@@ -21,7 +21,7 @@ class GamesController < ApplicationController
 
 	def index
 		# lines below for temp use until profile controller has been setup
-		@user = User.find(2)
+		# @user = User.find(2)
 		@game1 = Game.create(name: "fixed deposit")
 		@game2 = Game.create(name: "unit trust")
 		@game3 = Game.create(name: "stock")
