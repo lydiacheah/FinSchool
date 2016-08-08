@@ -262,7 +262,7 @@
           $('#withdraw').removeClass("btn-danger")
           $('#withdraw').addClass("btn-success")
           clearInterval(progress);
-          var profit = (placementAmount * (1 + $interestRate/100)).toFixed(4);
+          var profit = (placementAmount * Math.pow(1 + $interestRate/100/12, $months)).toFixed(2);
           $('#profit').text(profit);
           refreshRates();
         }
