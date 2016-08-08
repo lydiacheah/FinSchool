@@ -151,11 +151,12 @@
           <th>#</th>
           <th class="col-xs-1 col-sm-1 col-md-1 col-lg-1">Fund</th>
           <th class="col-xs-1 col-sm-1 col-md-1 col-lg-1 text-right">Unit</th>
-          <th class="col-xs-2 col-sm-2 col-md-2 col-lg-2 text-right">Original NAV</th>
+          <th class='col-xs-1 col-sm-1 col-md-1 col-lg-1 text-right'>Unit Cost</th>
+          <th class="col-xs-2 col-sm-2 col-md-2 col-lg-2 text-right">Cost NAV</th>
           <th class="col-xs-2 col-sm-2 col-md-2 col-lg-2 text-right">Market NAV</th>
           <th class="col-xs-2 col-sm-2 col-md-2 col-lg-2 text-right">Profit/(Loss)</th>
-          <th class="col-xs-2 col-sm-2 col-md-2 col-lg-2 text-center">No. of Months held</th>
-          <th class="col-xs-2 col-sm-2 col-md-2 col-lg-2"></th>
+          <th class="col-xs-2 col-sm-2 col-md-2 col-lg-2 text-center">Months Held</th>
+          <th class="col-xs-1 col-sm-1 col-md-1 col-lg-1"></th>
         </tr>
       </thead>
       <tbody></tbody>
@@ -246,8 +247,9 @@
     $('#buy').click(function(){
       var tableBody       = $('#holdings_summary table tbody');
       var managementFee   = Number($('#management_fee').text());
-      var unit            = $('#qty').val();
-      var originalNav     = (Number($('#selected_total').text())).toFixed(2); 
+      var unit            = $('#qty').val(); 
+      var originalNav     = (Number($('#selected_total').text())).toFixed(2);
+      var unitCost        = (originalNav/unit).toFixed(2);
       var marketNav       = (originalNav - managementFee).toFixed(2);
       var profitLoss      = (marketNav - originalNav).toFixed(2);
       var numOfMonthsHeld = 0;
@@ -256,6 +258,7 @@
         tableBody.append('<tr><td></td>'+
                               '<td>'+$selectedFund+'</td>'+
                               '<td class="text-right">'+unit+'</td>'+
+                              '<td class="text-right">'+unitCost+'</td>'+
                               '<td class="text-right">'+originalNav+'</td>'+
                               '<td class="text-right">'+marketNav+'</td>'+
                               '<td class="text-right">'+profitLoss+'</td>'+
@@ -264,19 +267,23 @@
         )
       }else{
         var thisRowUnit = thisRow.children('td:eq(2)');
-        var updatedUnit = (Number(thisRowUnit.text()) + Number(unit)).toFixed(2);
+        var updatedUnit = Number(thisRowUnit.text()) + Number(unit);
         thisRowUnit.text(updatedUnit);
 
-        var thisRowOriginalNav = thisRow.children('td:eq(3)');
+        var thisRowOriginalNav = thisRow.children('td:eq(4)');
         var updatedOriginalNav = (Number(thisRowOriginalNav.text()) + Number(originalNav)).toFixed(2);
         thisRowOriginalNav.text(updatedOriginalNav);
 
+        var thisRowUnitCost = thisRow.children('td:eq(3)');
+        var updatedUnitCost = (updatedOriginalNav/updatedUnit).toFixed(2);
+        thisRowUnitCost.text(updatedUnitCost);
 
-        var thisRowMarketNav = thisRow.children('td:eq(4)');
+
+        var thisRowMarketNav = thisRow.children('td:eq(5)');
         var updatedMarketNav = (Number(thisRowMarketNav.text()) + Number(marketNav)).toFixed(2);
         thisRowMarketNav.text(updatedMarketNav);
 
-        var thisRowProfit = thisRow.children('td:eq(5)');
+        var thisRowProfit = thisRow.children('td:eq(6)');
         var updatedRowProfit = (updatedMarketNav - updatedOriginalNav).toFixed(2);
         thisRowProfit.text(updatedRowProfit);
 
@@ -288,10 +295,10 @@
 
     $(document).on('click', 'button.sell', function(){
       $thisRow            = $(this).closest('tr');
-      var thisOriginalNav = $thisRow.children('td:eq(3)').text();
-      var thisMarketNav   = $thisRow.children('td:eq(4)').text();
-      var thisProfit      = $thisRow.children('td:eq(5)').text();
-      var thisNumOfMonths = $thisRow.children('td:eq(6)').text();
+      var thisOriginalNav = $thisRow.children('td:eq(4)').text();
+      var thisMarketNav   = $thisRow.children('td:eq(5)').text();
+      var thisProfit      = $thisRow.children('td:eq(6)').text();
+      var thisNumOfMonths = $thisRow.children('td:eq(7)').text();
       var profitEarned    = (Number(thisMarketNav) - Number(thisOriginalNav)).toFixed(2);
       saveTransaction(thisOriginalNav, thisMarketNav, thisNumOfMonths);
       update_user_profile(profitEarned);
@@ -337,10 +344,11 @@
           tbody.each(function(){
             var thisFund        = $(this).children('td:eq(1)').text();
             var thisUnit        = Number($(this).children('td:eq(2)').text());
-            var thisOriginalNav = Number($(this).children('td:eq(3)').text());
-            var thisRate        = $(this).children('td:eq(4)');
-            var thisProfit      = $(this).children('td:eq(5)');
-            var thisMonth       = $(this).children('td:eq(6)');
+            //var thisUnitCost    = Number($(this).children('td:eq(3)').text());
+            var thisOriginalNav = Number($(this).children('td:eq(4)').text());
+            var thisMarketNav   = $(this).children('td:eq(5)');
+            var thisProfit      = $(this).children('td:eq(6)');
+            var thisMonth       = $(this).children('td:eq(7)');
             switch(thisFund){
               case "Fund A":
                 var newValue = (thisUnit * data[0]).toFixed(2);
@@ -355,7 +363,7 @@
             var updatedMonth = Number(thisMonth.text()) + 1;
             thisProfit.text(updatedProfit);
             thisMonth.text(updatedMonth);
-            thisRate.text(newValue);
+            thisMarketNav.text(newValue);
           })
         }
       });
