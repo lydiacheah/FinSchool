@@ -1,67 +1,99 @@
 <div class="container">
-  <div class="jumbotron">
-    <h1>Unit Trust</h1> 
+  <div class="row"> 
+    <div class="jumbotron text-center">
+      <h1>Unit Trust</h1> 
+    </div>
   </div>
   
-  <div id="myCarousel" class="carousel slide" data-ride="carousel">
-  <!-- Indicators -->
-  <ol class="carousel-indicators">
-    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-    <li data-target="#myCarousel" data-slide-to="1"></li>
-    <li data-target="#myCarousel" data-slide-to="2"></li>
-    <li data-target="#myCarousel" data-slide-to="3"></li>
-  </ol>
 
-  <!-- Wrapper for slides -->
-  <div class="carousel-inner" role="listbox">
-    <div class="item active">
-      <%= image_tag("UT1.JPG") %>
+  <!-- Carousel -->
+  <div class="row">
+    <div class="col-md-10 col-md-offset-1">  
+      <div id="myCarousel" class="carousel slide" data-ride="carousel">
+        <!-- Indicators -->
+        <ol class="carousel-indicators">
+          <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+          <li data-target="#myCarousel" data-slide-to="1"></li>
+          <li data-target="#myCarousel" data-slide-to="2"></li>
+          <li data-target="#myCarousel" data-slide-to="3"></li>
+        </ol>
+
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner" role="listbox">
+          <div class="item active">
+            <%= image_tag("UT1.JPG") %>
+          </div>
+
+          <div class="item">
+            <%= image_tag("UT2.JPG") %>
+          </div>
+        </div>
+
+
+        <!-- Left and right controls -->
+        <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+          <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+          <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </a>
+      </div>
     </div>
+  </div> 
+  <hr> 
 
-    <div class="item">
-      <%= image_tag("UT2.JPG") %>
+  <div class="row">
+    <div class="text-center">
+      <h2><strong>Please Choose Your Unit Trust Fund</strong></h2>
     </div>
-
   </div>
+  <br>
 
- <div class="container-fluid">
-  <div class="text-center">
-    <h2><strong>Please choose your unit trust fund</strong></h2>
-  </div>
-
-
- <div class="row slideanim">
-   <div class="col-sm-4 col-xs-12" id="fundA">
-     <div class="panel panel-default text-center">
-       <div class="jumbotron">
-   		   <h1>Fund A</h1> 
-  		 </div>
-		     <h2> Potential Yield: 3% - 5% </h2>
-  		   <h2> Current NAV: RM <span id="ut_nav1"></span></h2>
-     </div>
-   </div>
+  <div class="row">
+    <!-- Fund A -->    
+    <div class="col-md-4" id="fundA">
+      <div class="panel panel-default preview">
+        <div class="panel-heading">            
+          <img src=<%= asset_path 'A.png' %> alt="Fund A" class="img-rounded" width="328px">            
+        </div>
+        <div class="panel-body text-center">
+          <h2> Potential Yield: 3% - 5% </h2>
+          <h2> Current NAV: RM <span id="ut_nav1"></span></h2>
+        </div>
+      </div>
+    </div>
   
-   <div class="col-sm-4 col-xs-12" id="fundB">
-     <div class="panel panel-default text-center">
-        <div class="jumbotron">
-   			<h1>Fund B</h1> 
-  		</div>
-    <h2> Potential Yield: 4% - 8% </h2>
-      <h2> Current NAV: RM <span id="ut_nav2"></span></h2>
-     </div>
-   </div>
- 
-   <div class="col-sm-4 col-xs-12" id="fundC">
-     <div class="panel panel-default text-center">
-        <div class="jumbotron">
-   			  <h1>Fund C</h1> 
-  		  </div>
-        <h2> Potential Yield: 5% - 10% </h2>
-        <h2>Current NAV : RM <span id="ut_nav3"></span></h2>
-     </div>
-   </div>
- </div>
 
+    <!-- Fund B -->    
+    <div class="col-md-4" id="fundB">
+      <div class="panel panel-default preview">
+        <div class="panel-heading">            
+          <img src=<%= asset_path 'B.png' %> alt="Fund B" class="img-rounded" width="328px">            
+        </div>
+        <div class="panel-body text-center">
+          <h2> Potential Yield: 4% - 8% </h2>
+          <h2> Current NAV: RM <span id="ut_nav2"></span></h2>
+        </div>
+      </div>
+    </div>
+    
+
+    <!-- Fund C -->    
+    <div class="col-md-4" id="fundC">
+      <div class="panel panel-default preview">
+        <div class="panel-heading">            
+          <img src=<%= asset_path 'C.png' %> alt="Fund C" class="img-rounded" width="328px">                 
+        </div>
+        <div class="panel-body text-center">
+          <h2> Potential Yield: 5% - 10% </h2>
+          <h2>Current NAV : RM <span id="ut_nav3"></span></h2>
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr>  
   <br>
 
   <div class="progress">

@@ -1,134 +1,152 @@
 <div class="container">
-  <div class="jumbotron">
-    <h1>Stock Market</h1> 
+  <div class="row"> 
+    <div class="jumbotron text-center">
+      <h1>Stock Market</h1> 
+    </div>
   </div>
   
-   <div id="myCarousel" class="carousel slide" data-ride="carousel">
-  <!-- Indicators -->
-  <ol class="carousel-indicators">
-    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-    <li data-target="#myCarousel" data-slide-to="1"></li>
-    <li data-target="#myCarousel" data-slide-to="2"></li>
-    <li data-target="#myCarousel" data-slide-to="3"></li>
-  </ol>
+  <!-- Carousel -->
+  <div class="row">
+    <div class="col-md-10 col-md-offset-1">
+      <div id="myCarousel" class="carousel slide" data-ride="carousel">
+        <!-- Indicators -->
+        <ol class="carousel-indicators">
+          <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+          <li data-target="#myCarousel" data-slide-to="1"></li>
+          <li data-target="#myCarousel" data-slide-to="2"></li>
+          <li data-target="#myCarousel" data-slide-to="3"></li>
+        </ol>
 
-  <!-- Wrapper for slides -->
-  <div class="carousel-inner" role="listbox">
-    <div class="item active">
-      <%= image_tag("SM1.JPG") %>
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner" role="listbox">
+          <div class="item active">
+            <%= image_tag("SM1.JPG") %>
+          </div>
+
+          <div class="item">
+            <%= image_tag("SM2.JPG") %>
+          </div>
+
+          <div class="item">
+            <%= image_tag("SM3.JPG") %>
+          </div>
+        </div>
+
+        <!-- Left and right controls -->
+        <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+          <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+          <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </a>
+      </div>
     </div>
+  </div> 
+  <hr> 
 
-    <div class="item">
-      <%= image_tag("SM2.JPG") %>
+
+  <div class="row">
+    <div class="text-center">
+      <h2><strong>Please Choose The Sector To Invest</strong></h2>
     </div>
+  </div>
+  <br>
 
-    <div class="item">
-      <%= image_tag("SM3.JPG") %>
+  <div class="row">
+    <!-- Financial Sector -->    
+    <div class="col-md-4">
+      <div class="panel panel-default preview">
+        <div class="panel-heading">
+          <img src=<%= asset_path 'financialsector.png' %> alt="Financial Sector" class="img-thumbnail">
+        </div>
+        <div class="panel-body text-center">
+          <h3>Finance Sector</h3>
+          <p>Volatility:</p>
+          <p>Historical Return:</p>
+        </div>
+      </div>
     </div>
+      
 
+    <!-- Construction Sector -->  
+    <div class="col-md-4">
+      <div class="panel panel-default preview">
+        <div class="panel-heading">
+          <img src=<%= asset_path 'constructionsector.png' %> alt="Construction Sector" class="img-thumbnail">
+        </div>
+        <div class="panel-body text-center">
+          <h3>Construction Sector</h3>
+          <p>Volatility:</p>
+          <p>Historical Return:</p>
+        </div>
+      </div>
+    </div>  
+   
+
+    <!-- Plantation Sector -->    
+    <div class="col-md-4">
+      <div class="panel panel-default preview">
+        <div class="panel-heading">
+          <img src=<%= asset_path 'plantationsector.png' %> alt="Plantation Sector" class="img-thumbnail">
+        </div>
+        <div class="panel-body text-center">
+          <h3>Plantation Sector</h3>
+          <p>Volatility:</p>
+          <p>Historical Return:</p>
+        </div>
+      </div>
+    </div>    
+  </div>  
+
+
+  <div class="row">
+    <!-- Production Sector -->    
+    <div class="col-md-4">
+      <div class="panel panel-default preview">
+        <div class="panel-heading">
+          <img src=<%= asset_path 'consumerproduct.png' %> alt="Consumer Product Sector" class="img-thumbnail">
+        </div>
+        <div class="panel-body text-center">
+          <h3>Consumer Product Sector</h3>
+          <p>Volatility:</p>
+          <p>Historical Return:</p>
+        </div>
+      </div>
+    </div>
+    
+  
+    <!-- Technology Secotr -->    
+    <div class="col-md-4">
+      <div class="panel panel-default preview">
+        <div class="panel-heading">
+          <img src=<%= asset_path 'technologysector.png' %> alt="Technology Sector" class="img-thumbnail">
+        </div>
+        <div class="panel-body text-center">
+          <h3>Technology Sector</h3>
+          <p>Volatility:</p>
+          <p>Historical Return:</p>
+        </div>
+      </div>
+    </div>
+  
+    
+    <!-- Property Secotr -->    
+    <div class="col-md-4">
+      <div class="panel panel-default preview">
+        <div class="panel-heading">
+          <img src=<%= asset_path 'propertysector.png' %> alt="Properties Sector" class="img-thumbnail">
+        </div>
+        <div class="panel-body text-center">
+          <h3>Properties Sector</h3>
+          <p>Volatility:</p>
+          <p>Historical Return:</p>
+        </div>
+      </div>
+    </div>    
   </div>
 
-  <!-- Left and right controls -->
-  <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-    <span class="sr-only">Previous</span>
-  </a>
-  <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-    <span class="sr-only">Next</span>
-  </a>
- </div>
-
-
-
-
-
-
-
-
- <div class="container-fluid">
-  <div class="text-center">
-    <h2><strong>Decide your investment portfolio</strong></h2>
-  </div>
-
-
- <div class="row slideanim">
-   <div class="col-sm-4 col-xs-12">
-     <div class="panel panel-default text-center">
-        <div class="jumbotron">
-   			<h1>Finance Sector</h1> 
-  		</div>
-		<h2> Volatility: </h2>
-  		<h2> Historical Return: </h2>
-     </div>
-   </div>
-
-
-  
-   <div class="col-sm-4 col-xs-12">
-     <div class="panel panel-default text-center">
-        <div class="jumbotron">
-   			<h1>Construction Sector</h1> 
-  		</div>
-		<h2> Volatility: </h2>
-  		<h2> Historical Return: </h2>
-     </div>
-   </div>
-
-
- 
-   <div class="col-sm-4 col-xs-12">
-     <div class="panel panel-default text-center">
-        <div class="jumbotron">
-   			<h1>Consumer Products Sector </h1> 
-  		</div>
-		<h2> Volatility: </h2>
-  		<h2> Historical Return: </h2>
-     </div>
-   </div>
- </div>
-
- <div class="row slideanim">
-   <div class="col-sm-4 col-xs-12">
-     <div class="panel panel-default text-center">
-        <div class="jumbotron">
-   			<h1>Technology Sector</h1> 
-  		</div>
-		<h2> Volatility: </h2>
-  		<h2> Historical Return: </h2>
-     </div>
-   </div>
-
-
-  
-   <div class="col-sm-4 col-xs-12">
-     <div class="panel panel-default text-center">
-        <div class="jumbotron">
-   			<h1>Properties Sector</h1> 
-  		</div>
-		<h2> Volatility: </h2>
-  		<h2> Historical Return: </h2>
-     </div>
-   </div>
-
-
- 
-   <div class="col-sm-4 col-xs-12">
-     <div class="panel panel-default text-center">
-        <div class="jumbotron">
-   			<h1>Trading/Services Sector</h1> 
-  		</div>
-		<h2> Volatility: </h2>
-  		<h2> Historical Return: </h2>
-     </div>
-   </div>
- </div>
-
-
-	<div class="form-group">
-       <input type="integer">
-       <input type="submit" value="Deposit">
-    </div>
 
 
 <div class="panel panel-default">
@@ -146,18 +164,53 @@
   </div>
 </div>
 
+  <div class="row">
+    <!-- Trading/Service Sector -->    
+    <div class="col-md-4">
+      <div class="panel panel-default preview">
+        <div class="panel-heading">
+          <img src=<%= asset_path 'trading_service_sector.png' %> alt="Trading/Service Sector" class="img-thumbnail">
+        </div>
+        <div class="panel-body text-center">
+          <h3>Tading/Service Sector</h3>
+          <p>Volatility:</p>
+          <p>Historical Return:</p>
+        </div>
+      </div>
+    </div>
+    
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+    <!-- Utilities Sector -->    
+    <div class="col-md-4">
+      <div class="panel panel-default preview">
+        <div class="panel-heading">
+          <img src=<%= asset_path 'utilitiessector.png' %> alt="Utilities Sector" class="img-thumbnail">
+        </div>
+        <div class="panel-body text-center">
+          <h3>Utilities Sector</h3>
+          <p>Volatility:</p>
+          <p>Historical Return:</p>
+        </div>
+      </div>
+    </div>
+    
+    
+    <!-- Healthcare Sector -->    
+    <div class="col-md-4">
+      <div class="panel panel-default preview">
+        <div class="panel-heading">
+          <img src=<%= asset_path 'healthcare_sector.png' %> alt="Healthcare Sector" class="img-thumbnail">
+        </div>
+        <div class="panel-body text-center">
+          <h3>Healthcare Sector</h3>
+          <p>Volatility:</p>
+          <p>Historical Return:</p>
+        </div>
+      </div>
+    </div>    
+  </div>
+  <hr>
 </div>
+
+  
+
