@@ -40,10 +40,7 @@ class TransactionsController < ApplicationController
 		@sm_returns = @user_list_transaction.where(game_id: 3).sum(:end_amount)
 		@stock_market_roi = ((@sm_returns-@sm_investments)/@sm_investments) * 100
 
-		##                Second Row                ##
-		## Calculation of variables to be charted:
-
-		## 1. Vertical Bars, sum of amount earned by day ##
+		## Vertical Bars, sum of amount earned by day ##
 		fd_earning_d3 = 1000 ## today
 		fd_earning_d2 = 500 ## yesterday
 		fd_earning_d1 = 250 ## 2 days before
@@ -56,29 +53,30 @@ class TransactionsController < ApplicationController
 		sm_earning_d2 = 500 ## yesterday
 		sm_earning_d1 = 250 ## 2 days before
 
+		# initialize date variables
+		hari_ini = Date.today
+		semalam = hari_ini - 1
+		kelmarin = hari_ini - 2
 		@daily_earnings = [
-			{name: "Fixed Deposit", data: [["Today - 2", fd_earning_d1],
-											["Today - 1", fd_earning_d2],
-											["Today", fd_earning_d3]]},
-			{name: "Unit Trust", data: [["Today - 2", ut_earning_d1],
-										["Today - 1", ut_earning_d2],
-										["Today", ut_earning_d3]]},
-			{name: "Stock Market", data: [["Today - 2", sm_earning_d1],
-										["Today - 1", sm_earning_d2],
-										["Today", sm_earning_d3]]}
+			{name: "Fixed Deposit", data: [[kelmarin, fd_earning_d1],
+											[semalam, fd_earning_d2],
+											[hari_ini, fd_earning_d3]]},
+			{name: "Unit Trust", data: [[kelmarin, ut_earning_d1],
+										[semalam, ut_earning_d2],
+										[hari_ini, ut_earning_d3]]},
+			{name: "Stock Market", data: [[kelmarin, sm_earning_d1],
+										[semalam, sm_earning_d2],
+										[hari_ini, sm_earning_d3]]}
 		]
 
 		## Horizontal Bars, sum of amount earned by game ##
-		fd_total_earnings = 12000
-		ut_total_earnings = 15000
-		sm_total_earnings = 18000
+		fd_total_earnings = @user_list_transaction.where(game_id: 1).sum(:end_amount)
+		ut_total_earnings = @user_list_transaction.where(game_id: 2).sum(:end_amount)
+		sm_total_earnings = @user_list_transaction.where(game_id: 3).sum(:end_amount)
 		@activity_earnings = [["Fixed Deposit",fd_total_earnings],
 							["Unit Trust",ut_total_earnings],
 							["Stock Market",sm_total_earnings]]
 
-
-		##                Third Row                ##
-		## Calculation of variables to be charted:
 
 	end
 
