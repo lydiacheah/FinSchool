@@ -1,12 +1,14 @@
 $(document).ready(function() {
 	$('#goal-submit').click(function() {
+		goal = $('#goal-input').val().match(/\d+/);
 		$('#start-background').addClass('blur-background');
 		$('#goal-question').fadeOut();
 		$('#goal-go').fadeOut();
 		$('#sign-in-link').fadeOut();
 		$('#sign-in-form').hide();
 		$('#box').fadeIn(800);
-		$('#sign-up-form').fadeIn(700);	
+		$('#sign-up-form').fadeIn(700);
+		$('.password-field').append('<input type="hidden", name="profile[financial_goal]", value=' + goal + '>')	
 	});	
 
 	$('#sign-in-link').click(function() {

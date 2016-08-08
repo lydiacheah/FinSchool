@@ -18,6 +18,9 @@ class Clearance::UsersController < Clearance::BaseController
     @user = User.new(permit_params)
     if @user.save
       sign_in @user
+      @profile = @user.profiles.new(profile_params)
+      @profile.current_balance = 0.2*(params[:profile][:financial_goal]).to_f 
+      @profile.save
       redirect_to edit_user_path(@user)
     else
       flash[:danger] = @user.errors.values.flatten.last
@@ -65,5 +68,8 @@ class Clearance::UsersController < Clearance::BaseController
   def permit_params
     params.require(:user).permit(:name, :email, :nickname, :birthday, :password)
   end
-  
+
+  def profile_params
+    params.require(:profile).permit(:financial_goal)
+  end
 end
