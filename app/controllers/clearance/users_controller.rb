@@ -20,7 +20,11 @@ class Clearance::UsersController < Clearance::BaseController
       sign_in @user
       redirect_to edit_user_path(@user)
     else
-      render template: "users/new"
+      flash[:danger] = @user.errors.values.flatten.last
+      respond_to do |format|
+        format.html { redirect_to sign_in_path }
+        format.js
+      end
     end
   end
 

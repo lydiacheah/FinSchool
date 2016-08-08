@@ -15,3 +15,35 @@
 //= require turbolinks
 //= require bootstrap-sprockets
 //= require_tree .
+
+/* Set the width of the side navigation to 250px and the left margin of the page content to 250px */
+function openNav() {
+  document.getElementById("mySidenav").style.width = "400px";
+  document.getElementById("main").style.marginLeft = "400px";
+  // document.getElementById("open-navbar-button").style.marginLeft = "400px";
+  // document.getElementById("open-navbar-button").innerHTML = "<"; 
+}
+
+//  Set the width of the side navigation to 0 and the left margin of the page content to 0 
+function closeNav() {
+  document.getElementById("mySidenav").style.width = "0";
+  document.getElementById("main").style.marginLeft = "0";
+  // document.getElementById('open-navbar-button').style.marginLeft = "0";
+  // document.getElementById("open-navbar-button").innerHTML = ">"; 
+}
+
+// $(document).ready(function() {
+// 	$('#open-navbar-button').toggle(function() {
+// 		$('#mySidenav').width('400px');
+// 		$('#main').css({'margin-left':'400px'});
+// 		$('#open-navbar-button').css({'margin-left':'400px'});
+// 		$('#open-navbar-button').text('<');
+// 	});
+	
+	// $('#open-navbar-button').click(function() {
+	// 	$('#mySidenav').width('0');
+	// 	$('#main').css({'margin-left':"0"});
+	// 	$('#open-navbar-button').css({'margin-left':'0'});
+	// 	$('#open-navbar-button').text('>');
+	// })
+// });

@@ -65,6 +65,7 @@ ActiveRecord::Schema.define(version: 20160806110409) do
     t.string   "remember_token",     limit: 128,             null: false
     t.datetime "created_at",                                 null: false
     t.datetime "updated_at",                                 null: false
+    t.string   "avatar"
     t.index ["email"], name: "index_users_on_email", using: :btree
     t.index ["remember_token"], name: "index_users_on_remember_token", using: :btree
   end

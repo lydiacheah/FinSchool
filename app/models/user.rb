@@ -2,11 +2,11 @@ class User < ApplicationRecord
   include Clearance::User
 
   validates :name, presence: {message: "Please enter your full name."}
-  validates :email, presence: {message: "Please enter your email address."}
-  validates :password, presence: {message: "Please a password."}
+  validates :email, presence: {message: "Please enter your email address."}, format: {with: /.+@.+\..+/i, message: "Please enter a valid email address."}
+  # validates :password, presence: {message: "Please enter a password."}
 
-  has_many :authentications, :dependent => :destroy
-  has_many :profiles
+  has_many :authentications, dependent: :destroy
+  has_many :profiles, dependent: :destroy
 
   def self.create_with_auth_and_hash(authentication,auth_hash)
     create! do |u|
