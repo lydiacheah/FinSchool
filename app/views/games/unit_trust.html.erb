@@ -54,14 +54,14 @@
   <div class="row">
     <!-- Fund A -->
     <a href ="#">
-      <div class="col-md-4">
+      <div class="col-md-4" id="fundA">
         <div class="panel panel-default preview">
           <div class="panel-heading">            
             <img src=<%= asset_path 'A.png' %> alt="Fund A" class="img-rounded" width="328px">            
           </div>
           <div class="panel-body text-center">
-            <h3> Potential Yield: 3% - 5% </h3>
-            <h3> Current NAV: RM 0.90 </h3>
+            <h2> Potential Yield: 3% - 5% </h2>
+            <h2> Current NAV: RM <span id="ut_nav1"></span></h2>
           </div>
         </div>
       </div>
@@ -69,14 +69,14 @@
 
     <!-- Fund B -->
     <a href ="#">
-      <div class="col-md-4">
+      <div class="col-md-4" id="fundB">
         <div class="panel panel-default preview">
           <div class="panel-heading">            
             <img src=<%= asset_path 'B.png' %> alt="Fund B" class="img-rounded" width="328px">            
           </div>
           <div class="panel-body text-center">
-            <h3> Potential Yield: 4% - 8% </h3>
-            <h3> Current NAV: RM 0.30 </h3>
+            <h2> Potential Yield: 4% - 8% </h2>
+            <h2> Current NAV: RM <span id="ut_nav2"></span></h2>
           </div>
         </div>
       </div>
@@ -84,14 +84,14 @@
 
     <!-- Fund C -->
     <a href ="#">
-      <div class="col-md-4">
+      <div class="col-md-4" id="fundC">
         <div class="panel panel-default preview">
           <div class="panel-heading">            
             <img src=<%= asset_path 'C.png' %> alt="Fund C" class="img-rounded" width="328px">                 
           </div>
           <div class="panel-body text-center">
-            <h3> Potential Yield: 5% - 10% </h3>
-            <h3> Current NAV: RM 0.25 </h3>
+            <h2> Potential Yield: 5% - 10% </h2>
+            <h2>Current NAV : RM <span id="ut_nav3"></span></h2>
           </div>
         </div>
       </div>
@@ -100,16 +100,67 @@
 
 
 
-	<div class="form-group">
-       <input type="integer">
-       <input type="submit" value="Deposit">
-    </div>
-      <div class="form-group">
-        <input type="submit" value="Progress Bar">
-        <input type="submit" value="Re-invest">
-        <input type="submit" value="Sell">
-      </div>
-    <br>
+  <br>
+
+  <div class="progress">
+    <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width:0%;"></div>
+  </div>
+
+  <button id="start">Start</button>
+  <button id="stop">Stop</button>
+  <br>
+
+	<div class="status">
+    <table class="table">
+      <thead>
+        <th class="col-xs-2 col-sm-2 col-md-2 col-lg-2 text-center">Unit</th>
+        <th class="col-xs-1 col-sm-1 col-md-1 col-lg-1"></th>
+        <th class="col-xs-2 col-sm-2 col-md-2 col-lg-2">Per Unit NAV</th>
+        <th class="col-xs-1 col-sm-1 col-md-1 col-lg-1"></th>
+        <th class="col-xs-2 col-sm-2 col-md-2 col-lg-2">Total</th>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="text-center"><input type="number" class="form-control" id="qty" autocomplete="off" placeholder="Maximum unit can be bought:" /></td>
+          <td class="text-center">x</td>
+          <td id="selected_nav">0.00</td>
+          <td class="text-center">=</td>
+          <td id="selected_total">0.00</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <td><strong>Current Balance<strong></td>
+          <td class="text-center">=</td>
+          <td id="current_balance"><%= current_user_active_profile.current_balance %></td>
+        </tr>
+        <tr>
+          <td id="buy_btn"><button class="btn btn-primary btn-block" id="buy"> Buy </button></td>
+        </tr>
+       
+      </tbody>
+    </table>
+  </div>
+
+  <div id="holdings_summary">
+  <h2>Summary of your unit trust holdings</h2>
+    <input type="hidden" id="user_profile" user-id="<%= get_current_user_profile_path %>">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th class="col-xs-1 col-sm-1 col-md-1 col-lg-1">Fund</th>
+          <th class="col-xs-1 col-sm-1 col-md-1 col-lg-1 text-right">Unit</th>
+          <th class="col-xs-2 col-sm-2 col-md-2 col-lg-2 text-right">Original NAV</th>
+          <th class="col-xs-2 col-sm-2 col-md-2 col-lg-2 text-right">Market NAV</th>
+          <th class="col-xs-2 col-sm-2 col-md-2 col-lg-2 text-right">Profit/(Loss)</th>
+          <th class="col-xs-2 col-sm-2 col-md-2 col-lg-2 text-center">No. of Months held</th>
+          <th class="col-xs-2 col-sm-2 col-md-2 col-lg-2"></th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div> 
   
 
   <h3>
@@ -129,10 +180,214 @@
     Annualized rate of return <strong>-31.81%</strong> <br>
   </h3>
 
-
-
     <strong>Gains From Investment:</strong><br>
     Dividend announce is: <strong>0.0246</strong> <br>
     With the dividend obtained, total units now is: <strong>3708.87</strong> <br>
     <br>
 </div>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+
+    $selectedFund = null;
+
+    // initialiaztion of buy button
+    function initialize(){
+      $('#buy').attr('disabled', 'true');
+      $('#fundA').css("border", "");
+      $('#fundB').css("border", "");
+      $('#fundC').css("border", "");
+      $('#qty').val("");
+      $('#qty').attr("placeholder", "Maximum unit can be bought:")
+      $('#selected_nav').text(0.00);
+      $('#selected_total').text(0.00);
+      $selectedFund = null;
+    }
+    // fund selection display
+    $('#fundA').click(function(){
+      $(this).css("border", "1px red solid");
+      $selectedFund = 'Fund A';
+      updateStatusTable(Number($('#ut_nav1').text()));
+      $('#fundB').css("border", "");
+      $('#fundC').css("border", "");
+    });
+    $('#fundB').click(function(){
+      $(this).css("border", "1px red solid");
+      $selectedFund = 'Fund B';
+      updateStatusTable(Number($('#ut_nav2').text()));
+      $('#fundA').css("border", "");
+      $('#fundC').css("border", "");
+    });
+    $('#fundC').click(function(){
+      $(this).css("border", "1px red solid");
+      $selectedFund = 'Fund C';
+      updateStatusTable(Number($('#ut_nav3').text()));
+      $('#fundA').css("border", "");
+      $('#fundB').css("border", "");
+    }); // fund selection display
+
+    // to update the total on input after the user has selected the desired fund
+    $('#qty').on('input change blur', function(){
+        var value = ($(this).val() * Number($('#selected_nav').text())).toFixed(2);
+        $('#selected_total').text(value);
+
+        // to enable / disable buy button depending on the user's current balance
+        var current_balance = Number($('#current_balance').text());
+        if (value == 0 || value > current_balance){
+          $('#buy').attr('disabled', 'true');
+        }else if (value <= current_balance){
+          $('#buy').removeAttr('disabled');
+        }
+    })
+
+    $('#buy').click(function(){
+      var tableBody       = $('#holdings_summary table tbody');
+      var unit            = $('#qty').val();
+      var originalNav     = (Number($('#selected_nav').text()) * unit).toFixed(2); 
+      var marketNav       = originalNav;
+      var profitLoss      = "0.00";
+      var numOfMonthsHeld = 0;
+      tableBody.append('<tr><td></td>'+
+                            '<td>'+$selectedFund+'</td>'+
+                            '<td class="text-right">'+unit+'</td>'+
+                            '<td class="text-right">'+originalNav+'</td>'+
+                            '<td class="text-right">'+marketNav+'</td>'+
+                            '<td class="text-right">'+profitLoss+'</td>'+
+                            '<td class="text-center">'+numOfMonthsHeld+'</td>'+
+                            '<td><button class="btn btn-danger btn-block sell">Sell</button></td>'
+        )
+      var updatedCurrentBalance = (Number($('#current_balance').text()) - originalNav).toFixed(2);
+      $('#current_balance').text(updatedCurrentBalance);
+      initialize();
+    });
+
+    $(document).on('click', 'button.sell', function(){
+      $thisRow            = $(this).closest('tr');
+      var thisOriginalNav = $thisRow.children('td:eq(3)').text();
+      var thisMarketNav   = $thisRow.children('td:eq(4)').text();
+      var thisProfit      = $thisRow.children('td:eq(5)').text();
+      var thisNumOfMonths = $thisRow.children('td:eq(6)').text();
+      var profitEarned    = (Number(thisMarketNav) - Number(thisOriginalNav)).toFixed(2);
+      saveTransaction(thisOriginalNav, thisMarketNav, thisNumOfMonths);
+      update_user_profile(profitEarned);
+      //$thisRow.remove();
+    });
+
+    function updateStatusTable(rate){
+
+      // updatating of table info based on the user's selected fund
+      $('#selected_nav').text(rate);
+
+      // processing of total value to be displayed on the table
+      var selectedQty = $('#qty').val();
+      var total = (rate * selectedQty).toFixed(2);
+      $('#selected_total').text(total);
+
+      // processing of numbers of unit buyable given the user's current balance to be displayed on the table
+      var current_balance = Number($('#current_balance').text());
+      var unitBuyable = Math.floor(current_balance/rate);
+      $('#qty').attr("placeholder", "Maximum unit can be bought: "+unitBuyable);
+            
+    } // updateStatusTable
+
+    // initialization/re-initialization of fund rates
+    function refreshRates(){
+      $.ajax({
+        method: "post",
+        url: "/refresh_ut_rates",
+        beforeSend: function(xhr){xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
+        dataType: "json",
+        success: function(data){
+          $('#ut_nav1').text(data[0]);
+          $('#ut_nav2').text(data[1]);
+          $('#ut_nav3').text(data[2]);
+
+          // update user holdings summary based on new rates
+          var tbody = $('#holdings_summary table tbody tr');
+          tbody.each(function(){
+            var thisFund        = $(this).children('td:eq(1)').text();
+            var thisUnit        = Number($(this).children('td:eq(2)').text());
+            var thisOriginalNav = Number($(this).children('td:eq(3)').text());
+            var thisRate        = $(this).children('td:eq(4)');
+            var thisProfit      = $(this).children('td:eq(5)');
+            var thisMonth       = $(this).children('td:eq(6)');
+            switch(thisFund){
+              case "Fund A":
+                var newValue = (thisUnit * data[0]).toFixed(2);
+                break;
+              case "Fund B":
+                var newValue = (thisUnit * data[1]).toFixed(2);
+                break;
+              case "Fund C":
+                var newValue = (thisUnit * data[2]).toFixed(2);
+            }
+            var updatedProfit = (newValue - thisOriginalNav).toFixed(2);
+            var updatedMonth = Number(thisMonth.text()) + 1;
+            thisProfit.text(updatedProfit);
+            thisMonth.text(updatedMonth);
+            thisRate.text(newValue);
+          })
+        }
+      });
+    } // function refreshRates
+
+    function saveTransaction(startAmount, endAmount, months){
+      $.ajax({
+        method: "post",
+        url: "/transactions",
+        beforeSend: function(xhr){xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
+        data: {
+          transaction: {
+            game_id: "2",
+            start_amount: startAmount,
+            end_amount: endAmount,
+            months: months
+            }
+        },
+        success: function(){
+          var currentBalance = $('#current_balance');
+          var updatedCurrentBalance = (Number(currentBalance.text()) + Number(endAmount)).toFixed(2);
+          currentBalance.text(updatedCurrentBalance);
+        }
+      });
+    }
+
+    function update_user_profile(profit){
+      $.ajax({
+        method: "post",
+        url: $("#user_profile").attr("user-id"),
+        beforeSend: function(xhr){xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
+        data: { _method: 'PUT', current_balance: profit },
+        success: function(){
+          $thisRow.remove();
+        }
+      });
+    }
+
+    initialize();
+    refreshRates();
+
+    var progressbar = 0
+    var timer = null
+    $('#start').click(function(){
+      timer = setInterval(function(){
+        progressbar += 1;
+        if (progressbar > 2){
+            $('.progress-bar').attr("aria-valuenow", progressbar);
+            $('.progress-bar').text(Math.floor(progressbar)+"%");
+            $('.progress-bar').attr("style", "width:"+progressbar+"%");
+        }
+        if (progressbar >= 100){
+            refreshRates();
+            progressbar = 0;
+          }
+      },100)
+    })
+
+    $('#stop').click(function(){
+      clearInterval(timer);
+    })
+    
+
+  }); //document ready
+</script>

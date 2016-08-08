@@ -1,6 +1,10 @@
 class User < ApplicationRecord
   include Clearance::User
 
+  validates :name, presence: {message: "Please enter your full name."}
+  validates :email, presence: {message: "Please enter your email address."}
+  validates :password, presence: {message: "Please a password."}
+
   has_many :authentications, :dependent => :destroy
   has_many :profiles
 
