@@ -5,6 +5,8 @@ class UsersController < Clearance::UsersController
 	def home
 		if current_user.nil?
 			redirect_to sign_in_path
+    elsif current_user.nickname.nil? || current_user.birthday.nil?
+      redirect_to edit_user_path(current_user)
 		else
       redirect_to games_path
     end
@@ -37,7 +39,7 @@ class UsersController < Clearance::UsersController
   end
 
   def user_params
-    params.require(:user).permit(:name, :email, :nickname, :birthday)
+    params.require(:user).permit(:name, :email, :nickname, :birthday, :password)
   end
   
 end

@@ -1,8 +1,8 @@
 <div class="sign-up-questions">
-	<%= form_for @user do |form| %>
+	<%= form_for @user, id: "edit-user-form" do |form| %>
 		<div id="nickname-question">
 			<p>How shall we address you?</p>
-			<%= form.text_field :nickname %>
+			<%= form.text_field :nickname, id: "nickname-input" %>
 			<button type="button" class="btn btn-link" id="sign-up-continue">></button>
 		</div>
 		<div id="birthday-question">
