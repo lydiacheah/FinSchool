@@ -248,7 +248,7 @@
       $startAmount = placementAmount;
       var updateStartBalance = (startBalance - placementAmount).toFixed(2);
       $('#start_balance').text(updateStartBalance);
-      $('#interest_rate').text($interestRate);
+      $('#interest_rate').text("haha"+$interestRate);
       $('#amount_placed').text(placementAmount);
       progress = setInterval(function(){
         progressbar += 100/$progressRate;
@@ -320,28 +320,16 @@
 
 <div class="panel panel-default">
   <div class="panel-body">
-    <strong>Investment Overview:</strong><br>
-    <p>
-    You have invested RM 1000 in an FD account with a rate of 3.05% p.a. with tenure of 3 months<br>
+    <h2><strong>Key Take Aways</strong></h2>
     <br>
-    <strong>Investment Gain:</strong><br>
     <p>
-    At the end of the maturity you receive RM 1018 for your investment.<br>
-    <br>   
+      1. 'Safe' investment with guaranteed returns <br>
+      2. Very good for short term durations <br>
+      3. Most suitable for investors with a low-risk profile
     </p>
   </div>
 </div>  
-
-  <h3>
-    <strong>Investment Overview:</strong><br>
-    Funds available: RM <strong>1000</strong> <br>
-    Interest gained at end of maturity: 1.8%<br>
-    <br>
-
-    <strong>Investment Summary:</strong><br>
-    Total value of investment: RM <strong>1018</strong> <br>
-    Annualized rate of return <strong>4.25%</strong> <br>
-  </h3>
+  
 
 
 </div>
