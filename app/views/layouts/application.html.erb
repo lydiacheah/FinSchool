@@ -15,14 +15,6 @@
 
 </head>
 <body class="container-fluid">
-  <div id="header">
-    <% if signed_in? -%>
-      <%= link_to t(".sign_out"), sign_out_path, method: :delete %>
-    <% else -%>
-      <%= link_to t(".sign_in"), sign_in_path %>
-    <% end -%>
-  </div>
-
   <div id="main">
     <% if signed_in? %>
       <%= render 'layouts/navbar' %>
