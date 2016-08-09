@@ -97,7 +97,7 @@
   <br>
 
   <div class="progress">
-    <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width:0%;"></div>
+    <div class="progress-bar progress-bar-striped active" id="ut_pb" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width:0%;"></div>
   </div>
 
   <button id="start">Start</button>
@@ -206,6 +206,7 @@
       updateStatusTable(Number($('#ut_nav1').text()));
       $('#fundB').css("border", "");
       $('#fundC').css("border", "");
+      $('#qty').val("");
     });
     $('#fundB').click(function(){
       $(this).css("border", "1px red solid");
@@ -213,6 +214,7 @@
       updateStatusTable(Number($('#ut_nav2').text()));
       $('#fundA').css("border", "");
       $('#fundC').css("border", "");
+      $('#qty').val("");
     });
     $('#fundC').click(function(){
       $(this).css("border", "1px red solid");
@@ -220,6 +222,7 @@
       updateStatusTable(Number($('#ut_nav3').text()));
       $('#fundA').css("border", "");
       $('#fundB').css("border", "");
+      $('#qty').val("");
     }); // fund selection display
 
     // to update the total on input after the user has selected the desired fund
@@ -405,9 +408,9 @@
       timer = setInterval(function(){
         progressbar += 1;
         if (progressbar > 2){
-            $('.progress-bar').attr("aria-valuenow", progressbar);
-            $('.progress-bar').text(Math.floor(progressbar)+"%");
-            $('.progress-bar').attr("style", "width:"+progressbar+"%");
+            $('#ut_pb').attr("aria-valuenow", progressbar);
+            $('#ut_pb').text(Math.floor(progressbar)+"%");
+            $('#ut_pb').attr("style", "width:"+progressbar+"%");
         }
         if (progressbar >= 100){
             refreshRates();
