@@ -1,8 +1,12 @@
 <div id="mySidenav" class="sidenav">
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
   <div class="avatar"></div>
-  <a href="#">Game 1</a>
-  <a href="#">Game 2</a>
+  <%= link_to "Edit Profile", edit_user_path(current_user.id) %>
+  <%= link_to "Index", games_path %>
+  <%= link_to "Game 1", game_path("fixed_deposit") %>
+  <%= link_to "Game 2", game_path("unit_trust") %>
+  <%= link_to "Game 3", game_path("stock") %>
+  <%= link_to "Summary", profile_path(current_user.id) %>
   <%= link_to "Sign Out", sign_out_path, method: :delete %>
 </div>
 
