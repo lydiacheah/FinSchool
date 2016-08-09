@@ -1,0 +1,143 @@
+<div class="container">
+
+  <div class="row"> 
+    <div class="jumbotron text-center">
+      <h1>Summary</h1> 
+    </div>
+  </div>  
+
+  <div class="row"> 
+    <!-- Current Balance -->  
+    <div class="col-md-4">
+      <div class="panel panel-default preview">
+        <div class="panel-heading">
+          <h2>Current Balance</h2>
+        </div>
+        <div class="panel-body text-center">
+          <h3>RM 2500</h3>
+        </div>
+      </div>
+    </div>
+        <!-- Financial Goal -->  
+    <div class="col-md-4">
+      <div class="panel panel-default preview">
+        <div class="panel-heading">
+          <h2>Financial Goal</h2>
+        </div>
+        <div class="panel-body text-center">
+          <h3>RM 100000</h3>
+        </div>
+      </div>
+    </div>
+    <!-- How far away is the user? -->  
+    <div class="col-md-4">
+      <div class="panel panel-default preview">
+        <div class="panel-heading">
+          <h2>How far away?</h2>
+        </div>
+        <div class="panel-body text-center">
+          <h3>30%</h3>
+        </div>
+      </div>
+    </div>
+  </div> <!-- end of row -->  
+
+  <div class="row"> 
+    <!-- Fixed Deposit ROI -->  
+    <div class="col-md-4">
+      <div class="panel panel-default preview">
+        <div class="panel-heading">
+          <h2>Fixed Deposit ROI</h2>
+        </div>
+        <div class="panel-body text-center">
+          <h3><%= @fixed_deposit_roi %></h3>
+        </div>
+      </div>
+    </div>
+        <!-- Unit Trust ROI -->  
+    <div class="col-md-4">
+      <div class="panel panel-default preview">
+        <div class="panel-heading">
+          <h2>Unit Trust ROI</h2>
+        </div>
+        <div class="panel-body text-center">
+          <h3><%= @unit_trust_roi %></h3>
+        </div>
+      </div>
+    </div>
+    <!-- Stock Market ROI -->  
+    <div class="col-md-4">
+      <div class="panel panel-default preview">
+        <div class="panel-heading">
+          <h2>Stock Market ROI</h2>
+        </div>
+        <div class="panel-body text-center">
+          <h3><%= @stock_market_roi %></h3>
+        </div>
+      </div>
+    </div>
+  </div> <!-- end of row --> 
+
+  <div class="row">
+    <!-- Vertical bar, amount by day -->
+    <div class="col-xs-6">
+      <h3>Daily Earnings</h3>
+      <%= column_chart @daily_earnings %>
+    </div>
+
+    <!-- Horizontal bar, amount by game -->
+    <div class="col-xs-6">
+      <h3>Earnings by Game</h3>
+      <%= bar_chart @activity_earnings %>
+    </div>
+  </div>
+
+  
+  <div class="row">
+    <!-- Pie Chart -->
+    <div class="col-xs-6">
+      <h3>Activities by Game ID</h3>
+      <%= pie_chart @user_list_transaction.group(:game_id).count %>
+    </div>
+
+    <!-- Line Chart - Single Series -->
+    <div class="col-xs-6">
+      <h3>Visits By Day</h3>
+      <%= line_chart @user_list_transaction.group_by_day(:created_at, format: "%B %d, %Y").count, discrete: true %>
+    </div>
+  </div>
+
+  <div class="row">
+    <!-- Column Chart --> 
+    <div class="col-xs-6">
+      <h3>Amount of Investment by Game</h3>
+      <br>
+      <%= column_chart({"FixedDeposit" => 2000, "UnitTrust" => 2500, "StockMarket" => 3000}) %>
+    </div>
+    <!-- Column Chart --> 
+    <div class="col-xs-6">
+      <h3>Amount of Gains by Game</h3>
+      <br>
+      <%= column_chart({"FixedDeposit" => 2500, "UnitTrust" => 2800, "StockMarket" => 4000}) %>
+    </div>
+  </div>
+
+  <div class="row">
+    <!-- Column Chart --> 
+    <div class="col-xs-6">
+      <h3>Amount of Investment by Game</h3>
+      <br>
+      <%= pie_chart({"FixedDeposit" => 2000, "UnitTrust" => 2500, "StockMarket" => 3000}) %>
+    </div>
+    <!-- Column Chart --> 
+    <div class="col-xs-6">
+      <h3>Amount of Gains by Game</h3>
+      <br>
+      <%= pie_chart({"FixedDeposit" => 2500, "UnitTrust" => 2800, "StockMarket" => 4000}) %>
+    </div>
+  </div>
+
+
+
+
+</div>

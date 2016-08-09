@@ -8,8 +8,13 @@
 		<div id="birthday-question">
 			<p>When is your birthday?</p>
 			<%= form.date_field :birthday, id: "birthday-input" %>
-			<br>
-			<%= form.submit "start" %>
+			<button type="button" class="btn btn-link" id="sign-up-continue-2">></button>
 		</div>
-	<% end %> 
+		<div id="financial-goal-question">
+			<p>Reconfirm your financial goal.</p>
+			<input type="text" id="financial-goal-input" name="profile[financial_goal]" value="RM <%= @profile.financial_goal %>">
+			<br>
+			<%= form.submit "start" %>		
+		</div>
+	<% end %>
 </div>
