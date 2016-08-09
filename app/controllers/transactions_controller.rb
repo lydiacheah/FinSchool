@@ -11,8 +11,6 @@ class TransactionsController < ApplicationController
 	end
 
 	def index
-		# @user_transaction = Transaction.last
-		# @for_chart = Transaction.all
 
 		# For the current user, determine the profile ID
 		@profile = Profile.find_by(user_id: current_user.id)
@@ -41,33 +39,24 @@ class TransactionsController < ApplicationController
 		@stock_market_roi = ((@sm_returns-@sm_investments)/@sm_investments) * 100
 
 		## Vertical Bars, sum of amount earned by day ##
-		fd_earning_d3 = 1000 ## today
-		fd_earning_d2 = 500 ## yesterday
-		fd_earning_d1 = 250 ## 2 days before
+		fd_daily_earnings = @user_list_transaction.where(game_id: 1)
+							.group_by_day(:created_at, last: 3, format: "%B %d, %Y")
+							.sum(:end_amount)
 
-		ut_earning_d3 = 1000 ## today
-		ut_earning_d2 = 500 ## yesterday
-		ut_earning_d1 = 250 ## 2 days before
+		ut_daily_earnings = @user_list_transaction.where(game_id: 2)
+							.group_by_day(:created_at, last: 3, format: "%B %d, %Y")
+							.sum(:end_amount)
 
-		sm_earning_d3 = 1000 ## today
-		sm_earning_d2 = 500 ## yesterday
-		sm_earning_d1 = 250 ## 2 days before
+		sm_daily_earnings = @user_list_transaction.where(game_id: 3)
+							.group_by_day(:created_at, last: 3, format: "%B %d, %Y")
+							.sum(:end_amount)
 
-		# initialize date variables
-		hari_ini = Date.today
-		semalam = hari_ini - 1
-		kelmarin = hari_ini - 2
+		# send the calculated data to the Vertical Bars
 		@daily_earnings = [
-			{name: "Fixed Deposit", data: [[kelmarin, fd_earning_d1],
-											[semalam, fd_earning_d2],
-											[hari_ini, fd_earning_d3]]},
-			{name: "Unit Trust", data: [[kelmarin, ut_earning_d1],
-										[semalam, ut_earning_d2],
-										[hari_ini, ut_earning_d3]]},
-			{name: "Stock Market", data: [[kelmarin, sm_earning_d1],
-										[semalam, sm_earning_d2],
-										[hari_ini, sm_earning_d3]]}
-		]
+			{name: "Fixed Deposit", data: fd_daily_earnings},
+			{name: "Unit Trust", data: ut_daily_earnings},
+			{name: "Stock Market", data: sm_daily_earnings}
+			]
 
 		## Horizontal Bars, sum of amount earned by game ##
 		fd_total_earnings = @user_list_transaction.where(game_id: 1).sum(:end_amount)
