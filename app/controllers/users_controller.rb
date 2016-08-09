@@ -44,8 +44,10 @@ class UsersController < Clearance::UsersController
     params.require(:user).permit(:name, :email, :nickname, :birthday, :password)
   end
 
+
   def profile_params
     params.require(:profile).permit(:financial_goal)
   end
+
   
 end
