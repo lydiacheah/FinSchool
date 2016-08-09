@@ -4,43 +4,16 @@
     <div class="jumbotron text-center">
       <h1>Summary</h1> 
     </div>
-  </div>  
+  </div>
 
-  <div class="row"> 
-    <!-- Current Balance -->  
-    <div class="col-md-4">
-      <div class="panel panel-default preview">
-        <div class="panel-heading">
-          <h2>Current Balance</h2>
-        </div>
-        <div class="panel-body text-center">
-          <h3>RM 2500</h3>
-        </div>
+  <div class="row">
+    <!-- Progress Bar -->
+    <h2>Distance away from Goal</h2>
+      <div class="progress">
+          <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" 
+              style="width:<%= @financial_progress %>%"><%= @financial_progress.round %>%</div>
       </div>
-    </div>
-        <!-- Financial Goal -->  
-    <div class="col-md-4">
-      <div class="panel panel-default preview">
-        <div class="panel-heading">
-          <h2>Financial Goal</h2>
-        </div>
-        <div class="panel-body text-center">
-          <h3>RM 100000</h3>
-        </div>
-      </div>
-    </div>
-    <!-- How far away is the user? -->  
-    <div class="col-md-4">
-      <div class="panel panel-default preview">
-        <div class="panel-heading">
-          <h2>How far away?</h2>
-        </div>
-        <div class="panel-body text-center">
-          <h3>30%</h3>
-        </div>
-      </div>
-    </div>
-  </div> <!-- end of row -->  
+  </div>  
 
   <div class="row"> 
     <!-- Fixed Deposit ROI -->  
@@ -50,7 +23,7 @@
           <h2>Fixed Deposit ROI</h2>
         </div>
         <div class="panel-body text-center">
-          <h3><%= @fixed_deposit_roi %></h3>
+          <h3><%= @fixed_deposit_roi.round(2) %>%</h3>
         </div>
       </div>
     </div>
@@ -61,7 +34,7 @@
           <h2>Unit Trust ROI</h2>
         </div>
         <div class="panel-body text-center">
-          <h3><%= @unit_trust_roi %></h3>
+          <h3><%= @unit_trust_roi.round(2) %>%</h3>
         </div>
       </div>
     </div>
@@ -72,7 +45,7 @@
           <h2>Stock Market ROI</h2>
         </div>
         <div class="panel-body text-center">
-          <h3><%= @stock_market_roi %></h3>
+          <h3><%= @stock_market_roi.round(2) %>%</h3>
         </div>
       </div>
     </div>
