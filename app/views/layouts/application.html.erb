@@ -15,18 +15,19 @@
     <%= javascript_include_tag "http://www.google.com/jsapi", "chartkick" %>
 
 </head>
-<body class="container-fluid">
-  <div id="main">
-    <% if signed_in? %>
-      <%= render 'layouts/navbar' %>
-    <% end %>
-  
-    <div id="flashes">
-      <%= render 'layouts/flashes' %>
+<body>
+  <div class="container-fluid" id="summary-container">
+    <div id="main">
+      <% if signed_in? %>
+        <%= render 'layouts/navbar' %>
+      <% end %>
+    
+      <div id="flashes">
+        <%= render 'layouts/flashes' %>
+      </div>
+      <%= yield %>
     </div>
-    <%= yield %>
   </div>
-
 </body>
 
 </html>
