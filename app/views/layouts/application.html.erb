@@ -10,12 +10,12 @@
 
    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
   <script src="https://js.braintreegateway.com/v2/braintree.js"></script>
-  <link href="https://fonts.googleapis.com/css?family=Comfortaa" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Comfortaa|Raleway" rel="stylesheet">
     <!--Required additions for chartkick -->
     <%= javascript_include_tag "http://www.google.com/jsapi", "chartkick" %>
 
 </head>
-<body class="container-fluid">
+<body>
   <div id="main">
     <% if signed_in? %>
       <%= render 'layouts/navbar' %>

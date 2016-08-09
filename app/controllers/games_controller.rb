@@ -1,5 +1,5 @@
 class GamesController < ApplicationController
-
+	before_action :set_user_and_profile
 
 	require 'json'
 	include GamesHelper
@@ -27,9 +27,6 @@ class GamesController < ApplicationController
 		@game3 = Game.create(name: "stock")
 	end
 
-
-
-
 	# rates refresher
 	def refresh_fixed_depoits_rates
 		@new_fixed_deposit_rate = fixed_deposit_rates
@@ -52,5 +49,10 @@ class GamesController < ApplicationController
 		end
 	end
 	
+	private
 
+	def set_user_and_profile
+		@user = current_user
+		@profile = @user.profiles.find_by(active: true)
+	end
 end
