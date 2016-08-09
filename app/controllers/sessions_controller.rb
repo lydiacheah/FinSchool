@@ -19,7 +19,7 @@ class SessionsController < Clearance::SessionsController
 		    @next = root_url
 		    @notice = "Welcome back!"
 		  else
-				user = User.create_with_auth_and_hash(authentication,auth_hash)
+				user = User.create_with_auth_and_hash(authentication,auth_hash) 
 		    @next = edit_user_path(user)   
 		    @notice = "Welcome to FinSchool. Why don't you tell us more about yourself?"
 		  end

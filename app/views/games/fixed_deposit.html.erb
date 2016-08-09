@@ -112,7 +112,7 @@
 
   
   <div class="progress">
-    <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width:0%;"></div>
+    <div class="progress-bar progress-bar-striped active" id="fd_pb" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width:0%;"></div>
   </div>
   
 
@@ -152,6 +152,7 @@
       $(this).css("border", "1px red solid");
       $('#6months').css("border", "");
       $('#9months').css("border", "");
+      $('#user_amount').val("");
       if ($('user_amount').val() != 0 && progressbar == 0){
         $('#place').removeAttr('disabled');
       }
@@ -164,6 +165,7 @@
       $(this).css("border", "1px red solid");
       $('#3months').css("border", "");
       $('#9months').css("border", "");
+      $('#user_amount').val("");
       if ($('user_amount').val() != 0 && progressbar == 0){
         $('#place').removeAttr('disabled');
       }
@@ -176,6 +178,7 @@
       $(this).css("border", "1px red solid");
       $('#3months').css("border", "");
       $('#6months').css("border", "");
+      $('#user_amount').val("");
       if ($('user_amount').val() != 0 && progressbar == 0){
         $('#place').removeAttr('disabled');
       }
@@ -248,21 +251,21 @@
       $startAmount = placementAmount;
       var updateStartBalance = (startBalance - placementAmount).toFixed(2);
       $('#start_balance').text(updateStartBalance);
-      $('#interest_rate').text("haha"+$interestRate);
+      $('#interest_rate').text($interestRate);
       $('#amount_placed').text(placementAmount);
       progress = setInterval(function(){
         progressbar += 100/$progressRate;
         if (progressbar > 2){
-          $('.progress-bar').attr("aria-valuenow", progressbar);
-          $('.progress-bar').text(Math.floor(progressbar)+"%");
-          $('.progress-bar').attr("style", "width:"+progressbar+"%");
+          $('#fd_pb').attr("aria-valuenow", progressbar);
+          $('#fd_pb').text(Math.floor(progressbar)+"%");
+          $('#fd_pb').attr("style", "width:"+progressbar+"%");
         }
         
         if (progressbar >= 100){
           $('#withdraw').removeClass("btn-danger")
           $('#withdraw').addClass("btn-success")
           clearInterval(progress);
-          var profit = (placementAmount * (1 + $interestRate/100)).toFixed(4);
+          var profit = (placementAmount * Math.pow(1 + $interestRate/100/12, $months)).toFixed(2);
           $('#profit').text(profit);
           refreshRates();
         }
@@ -290,8 +293,8 @@
       $('#amount_placed').text(0);
       $('#interest_rate').text(0);
       $('#user_amount').val("");
-      $('.progress-bar').text(progressbar+"%");
-      $('.progress-bar').attr("style", "width:"+progressbar+"%");
+      $('#fd_pb').text(progressbar+"%");
+      $('#fd_pb').attr("style", "width:"+progressbar+"%");
       $('#user_amount').removeAttr('disabled');
       $('#withdraw').attr('disabled', 'true');
       $('#place').attr('disabled', 'true');

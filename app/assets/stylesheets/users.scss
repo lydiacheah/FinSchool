@@ -52,3 +52,11 @@
 	text-align: right;		
 }
 
+#sign-up-continue-2 {
+	@extend #sign-up-continue;
+}
+
+#financial-goal-question {
+	display: none;
+}
+

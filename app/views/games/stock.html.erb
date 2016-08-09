@@ -202,7 +202,7 @@
 
 
 <div class="progress">
-    <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width:0%;"></div>
+    <div class="progress-bar progress-bar-striped active" id="s_pb" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width:0%;"></div>
   </div>
 
   <button id="start">Start</button>
@@ -214,19 +214,25 @@
       <thead>
         <th class="col-xs-2 col-sm-2 col-md-2 col-lg-2 text-center">Unit</th>
         <th class="col-xs-1 col-sm-1 col-md-1 col-lg-1"></th>
-        <th class="col-xs-2 col-sm-2 col-md-2 col-lg-2">Per Unit NAV</th>
+        <th class="col-xs-2 col-sm-2 col-md-2 col-lg-2">Per Unit Price</th>
+        <th class="col-xs-1 col-sm-1 col-md-1 col-lg-1"></th>
+        <th class="col-xs-1 col-sm-1 col-md-1 col-lg-2">Transaction Charges</th>
         <th class="col-xs-1 col-sm-1 col-md-1 col-lg-1"></th>
         <th class="col-xs-2 col-sm-2 col-md-2 col-lg-2">Total</th>
       </thead>
       <tbody>
         <tr>
-          <td class="text-center"><input type="number" class="form-control" id="qty" autocomplete="off" placeholder="Maximum unit can be bought:" /></td>
+          <td class="text-center"><input type="number" class="form-control" id="qty" autocomplete="off" placeholder="Max unit:" /></td>
           <td class="text-center">x</td>
           <td id="selected_stock_sector">0.00</td>
+          <td class="text-center">=</td>
+          <td id="transaction_charges">0</td>
           <td class="text-center">=</td>
           <td id="selected_total">0.00</td>
         </tr>
         <tr>
+          <td></td>
+          <td></td>
           <td></td>
           <td></td>
           <td><strong>Current Balance<strong></td>
@@ -248,13 +254,14 @@
       <thead>
         <tr>
           <th>#</th>
-          <th class="col-xs-1 col-sm-1 col-md-1 col-lg-1">Sector</th>
-          <th class="col-xs-1 col-sm-1 col-md-1 col-lg-1 text-right">Unit</th>
-          <th class="col-xs-2 col-sm-2 col-md-2 col-lg-2 text-right">Cost</th>
-          <th class="col-xs-2 col-sm-2 col-md-2 col-lg-2 text-right">Market Value</th>
-          <th class="col-xs-2 col-sm-2 col-md-2 col-lg-2 text-right">Profit/(Loss)</th>
-          <th class="col-xs-2 col-sm-2 col-md-2 col-lg-2 text-center">No. of Months held</th>
-          <th class="col-xs-2 col-sm-2 col-md-2 col-lg-2"></th>
+          <th>Sector</th>
+          <th class="text-center">Unit</th>
+          <th class="text-center">Cost</th>
+          <th class="text-center">Cost Value</th>
+          <th class="text-center">Market Value</th>
+          <th class="text-center">Profit/(Loss)</th>
+          <th class="text-center">Months</th>
+          <th class="text-center">Selling Price</th>
         </tr>
       </thead>
       <tbody></tbody>
@@ -296,8 +303,9 @@
       $('#s8').css("border", "");
       $('#s9').css("border", "");
       $('#qty').val("");
-      $('#qty').attr("placeholder", "Maximum unit can be bought:")
+      $('#qty').attr("placeholder", "Max unit:")
       $('#selected_stock_sector').text(0.00);
+      $('#transaction_charges').text(0.00);
       $('#selected_total').text(0.00);
       $selectedFund = null;
     }
@@ -314,6 +322,7 @@
       $('#s7').css("border", "");
       $('#s8').css("border", "");
       $('#s9').css("border", "");
+      $('#qty').val("");
     });
     $('#s2').click(function(){
       $(this).css("border", "1px red solid");
@@ -327,6 +336,7 @@
       $('#s7').css("border", "");
       $('#s8').css("border", "");
       $('#s9').css("border", "");
+      $('#qty').val("");
     });
     $('#s3').click(function(){
       $(this).css("border", "1px red solid");
@@ -340,6 +350,7 @@
       $('#s7').css("border", "");
       $('#s8').css("border", "");
       $('#s9').css("border", "");
+      $('#qty').val("");
     });
     $('#s4').click(function(){
       $(this).css("border", "1px red solid");
@@ -353,6 +364,7 @@
       $('#s7').css("border", "");
       $('#s8').css("border", "");
       $('#s9').css("border", "");
+      $('#qty').val("");
     });
     $('#s5').click(function(){
       $(this).css("border", "1px red solid");
@@ -366,6 +378,7 @@
       $('#s7').css("border", "");
       $('#s8').css("border", "");
       $('#s9').css("border", "");
+      $('#qty').val("");
     });
     $('#s6').click(function(){
       $(this).css("border", "1px red solid");
@@ -379,6 +392,7 @@
       $('#s7').css("border", "");
       $('#s8').css("border", "");
       $('#s9').css("border", "");
+      $('#qty').val("");
     });
     $('#s7').click(function(){
       $(this).css("border", "1px red solid");
@@ -392,6 +406,7 @@
       $('#s6').css("border", "");
       $('#s8').css("border", "");
       $('#s9').css("border", "");
+      $('#qty').val("");
     });
     $('#s8').click(function(){
       $(this).css("border", "1px red solid");
@@ -405,6 +420,7 @@
       $('#s6').css("border", "");
       $('#s7').css("border", "");
       $('#s9').css("border", "");
+      $('#qty').val("");
     });
     $('#s9').click(function(){
       $(this).css("border", "1px red solid");
@@ -418,12 +434,16 @@
       $('#s6').css("border", "");
       $('#s7').css("border", "");
       $('#s8').css("border", "");
+      $('#qty').val("");
     });
     // fund selection display
 
     // to update the total on input after the user has selected the desired fund
     $('#qty').on('input change blur', function(){
-        var value = ($(this).val() * Number($('#selected_stock_sector').text())).toFixed(2);
+        
+        var value = ($(this).val() * Number($('#selected_stock_sector').text()) * 1.02).toFixed(2);
+        var transactionCharges = ($(this).val() * Number($('#selected_stock_sector').text()) * 0.02).toFixed(2);
+        $('#transaction_charges').text(transactionCharges);
         $('#selected_total').text(value);
 
         // to enable / disable buy button depending on the user's current balance
@@ -436,21 +456,52 @@
     })
 
     $('#buy').click(function(){
-      var tableBody       = $('#holdings_summary table tbody');
-      var unit            = $('#qty').val();
-      var Cost            = (Number($('#selected_stock_sector').text()) * unit).toFixed(2); 
-      var marketvalue       = Cost;
-      var profitLoss      = "0.00";
-      var numOfMonthsHeld = 0;
-      tableBody.append('<tr><td></td>'+
-                            '<td>'+$selectedFund+'</td>'+
-                            '<td class="text-right">'+unit+'</td>'+
-                            '<td class="text-right">'+Cost+'</td>'+
-                            '<td class="text-right">'+marketvalue+'</td>'+
-                            '<td class="text-right">'+profitLoss+'</td>'+
-                            '<td class="text-center">'+numOfMonthsHeld+'</td>'+
-                            '<td><button class="btn btn-danger btn-block sell">Sell</button></td>'
+      var tableBody            = $('#holdings_summary table tbody');
+      var transactionCharges   = Number($('#transaction_charges').text());
+      var unit                 = $('#qty').val();
+      
+      var Cost                 = (Number($('#selected_total').text())).toFixed(2); 
+      var unitCost             = (Cost/unit).toFixed(2);
+      var marketvalue          = (Cost - transactionCharges).toFixed(2);
+      var profitLoss           = (marketvalue - Cost).toFixed(2);
+      var numOfMonthsHeld      = 0;
+      var selling_charges      = (marketvalue * 0.02).toFixed(2);
+      var sellingprice         = (marketvalue - selling_charges).toFixed(2);
+      var thisRow = $('#holdings_summary table tbody tr:contains('+$selectedFund+')');
+      if (thisRow.length < 1){
+        tableBody.append('<tr><td></td>'+
+                              '<td>'+$selectedFund+'</td>'+
+                              '<td class="text-center">'+unit+'</td>'+
+                              '<td class="text-center">'+unitCost+'</td>'+
+                              '<td class="text-center">'+Cost+'</td>'+
+                              '<td class="text-center">'+marketvalue+'</td>'+
+                              '<td class="text-center">'+profitLoss+'</td>'+
+                              '<td class="text-center">'+numOfMonthsHeld+'</td>'+
+                              '<td><button class="btn btn-danger btn-block sell">Sell for '+sellingprice+'</button></td>'
         )
+      }else{
+        var thisRowUnit = thisRow.children('td:eq(2)');
+        var updatedUnit = Number(thisRowUnit.text()) + Number(unit);
+        thisRowUnit.text(updatedUnit);
+
+        var thisRowCost = thisRow.children('td:eq(4)');
+        var updatedCost = (Number(thisRowOriginalValue.text()) + Number(Cost)).toFixed(2);
+        thisRowCost.text(updatedCost);
+
+        var thisRowUnitCost = thisRow.children('td:eq(3)');
+        var updatedUnitCost = (updatedCost/updatedUnit).toFixed(2);
+        thisRowUnitCost.text(updatedUnitCost);
+
+
+        var thisRowMarketValue = thisRow.children('td:eq(5)');
+        var updatedMarketValue = (Number(thisRowMarketValue.text()) + Number(marketvalue)).toFixed(2);
+        thisRowMarketValue.text(updatedMarketNav);
+
+        var thisRowProfit = thisRow.children('td:eq(6)');
+        var updatedRowProfit = (updatedMarketValue - updatedCost).toFixed(2);
+        thisRowProfit.text(updatedRowProfit);
+
+      }
       var updatedCurrentBalance = (Number($('#current_balance').text()) - Cost).toFixed(2);
       $('#current_balance').text(updatedCurrentBalance);
       initialize();
@@ -458,12 +509,14 @@
 
     $(document).on('click', 'button.sell', function(){
       $thisRow            = $(this).closest('tr');
-      var thisCost = $thisRow.children('td:eq(3)').text();
-      var thisMarketvalue   = $thisRow.children('td:eq(4)').text();
-      var thisProfit      = $thisRow.children('td:eq(5)').text();
-      var thisNumOfMonths = $thisRow.children('td:eq(6)').text();
-      var profitEarned    = (Number(thisMarketvalue) - Number(thisCost)).toFixed(2);
-      saveTransaction(thisCost, thisMarketvalue, thisNumOfMonths);
+      var thisCost        = $thisRow.children('td:eq(4)').text();
+      var thisMarketvalue = $thisRow.children('td:eq(5)').text();
+      var thisProfit      = $thisRow.children('td:eq(6)').text();
+      var thisNumOfMonths = $thisRow.children('td:eq(7)').text();
+      var thisselling_charges = (Number(thisMarketvalue) * 0.02).toFixed(2);
+      var profitEarned    = (Number(thisMarketvalue) - Number(thisCost)- Number(thisselling_charges)).toFixed(2);
+      var thissellingprice    = (Number(thisMarketvalue) - Number(thisselling_charges)).toFixed(2);
+      saveTransaction(thisCost, thissellingprice, thisNumOfMonths);
       update_user_profile(profitEarned);
       //$thisRow.remove();
     });
@@ -478,10 +531,15 @@
       var total = (rate * selectedQty).toFixed(2);
       $('#selected_total').text(total);
 
+      // processing transaction charges
+      var adjustedRate = rate*1.02;
+      var transactionCharges = ((selectedQty * rate) * 0.02).toFixed(2);
+      $('#transaction_charges').text(transactionCharges);
+
       // processing of numbers of unit buyable given the user's current balance to be displayed on the table
       var current_balance = Number($('#current_balance').text());
       var unitBuyable = Math.floor(current_balance/rate);
-      $('#qty').attr("placeholder", "Maximum unit can be bought: "+unitBuyable);
+      $('#qty').attr("placeholder", "Max unit: "+unitBuyable);
             
     } // updateStatusTable
 
@@ -507,11 +565,12 @@
           var tbody = $('#holdings_summary table tbody tr');
           tbody.each(function(){
             var thisFund        = $(this).children('td:eq(1)').text();
-            var thisUnit        = Number($(this).children('td:eq(2)').text());
-            var thisCost        = Number($(this).children('td:eq(3)').text());
-            var thisRate        = $(this).children('td:eq(4)');
-            var thisProfit      = $(this).children('td:eq(5)');
-            var thisMonth       = $(this).children('td:eq(6)');
+            var thisUnit        = $(this).children('td:eq(2)').text();
+            // var thisCost        = Number($(this).children('td:eq(3)').text());
+            var thisCostValue   = $(this).children('td:eq(4)').text();
+            var thisMarketValue = $(this).children('td:eq(5)');
+            var thisProfit      = $(this).children('td:eq(6)');
+            var thisMonth       = $(this).children('td:eq(7)');
             switch(thisFund){
               case "Finance":
                 var newValue = (thisUnit * data[0]).toFixed(2);
@@ -541,11 +600,11 @@
                 var newValue = (thisUnit * data[8]).toFixed(2);
                 break;
             }
-            var updatedProfit = (newValue - thisCost).toFixed(2);
+            var updatedProfit = Number((newValue - thisCostValue).toFixed(2));
             var updatedMonth = Number(thisMonth.text()) + 1;
             thisProfit.text(updatedProfit);
             thisMonth.text(updatedMonth);
-            thisRate.text(newValue);
+            thisMarketValue.text(newValue);
           })
         }
       });
@@ -558,7 +617,7 @@
         beforeSend: function(xhr){xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
         data: {
           transaction: {
-            game_id: "2",
+            game_id: "3",
             start_amount: startAmount,
             end_amount: endAmount,
             months: months
@@ -593,9 +652,9 @@
       timer = setInterval(function(){
         progressbar += 1;
         if (progressbar > 2){
-            $('.progress-bar').attr("aria-valuenow", progressbar);
-            $('.progress-bar').text(Math.floor(progressbar)+"%");
-            $('.progress-bar').attr("style", "width:"+progressbar+"%");
+            $('#s_pb').attr("aria-valuenow", progressbar);
+            $('#s_pb').text(Math.floor(progressbar)+"%");
+            $('#s_pb').attr("style", "width:"+progressbar+"%");
         }
         if (progressbar >= 100){
             refreshRates();
