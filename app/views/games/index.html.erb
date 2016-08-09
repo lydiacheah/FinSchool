@@ -1,48 +1,57 @@
-<div class="backgroud">
-	<div class="container">
-		<div class="row">
-			<div class="text-center title">
-				<h3>Financial Plan</h3>
-				<p>Financial Goal:</p>
-				<p>Current Balance:</p>
+
+<!-- <div class="backgroud"> -->
+	<div class="jumbotron">
+		<!-- <div class="welcome-text"> -->
+			<h3 id="welcome-back">Good evening, <%= @user.nickname || @user.name %></h3>
+			<div id="welcome-goals">
+				<p class="goal" id="welcome-financial-goal">
+					Your Financial Goal: <span class="goal-value">RM <%= @profile.financial_goal %></span>
+				</p>
+				<p class="goal" id="welcome-current-balance">
+					Your Current Balance: <span class="goal-value">RM <%= @profile.current_balance %></span>
+				</p>
 			</div>
-		</div>
+		<!-- </div> -->
+	</div>
+
+	<div class="container-fluid" style="width: 85%">
+		<p id="instructions">Learning is just a click away.</p>
 		<div class="row">
 			<div class="col-md-4">
 				<%= link_to game_path('fixed_deposit'), class: "preview" do %>
-					<div class="panel panel-default">					
-						<div class="panel-heading" id="img">
+					<!-- <div class="panel panel-default">					 -->
+						<!-- <div class="panel-heading" id="img"> -->
 							<img src=<%= asset_path 'fixeddeposit.jpg' %> alt="Fixed Deposit" class="img-thumbnail" >
-						</div>
-						<div class="panel-body text-center">
-							<p>Fixed Deposit</p>
-						</div>
-					</div>
+						<!-- </div> -->
+						<!-- <div class="panel-body text-center"> -->
+							<!-- <p>Fixed Deposit</p> -->
+						<!-- </div> -->
+					<!-- </div> -->
 				<% end %>
 			</div>
 			<div class="col-md-4">
 				<%= link_to game_path('unit_trust'), class: "preview" do %>
-					<div class="panel panel-default ">
-						<div class="panel-heading">
+					<!-- <div class="panel panel-default ">
+						<div class="panel-heading"> -->
 							<img src=<%= asset_path 'unittrust.png' %> alt="Unit Trust" class="img-thumbnail">
-						</div>
+						<!-- </div>
 						<div class="panel-body text-center">
 							<p>Unit Trust</p>
 						</div>
-					</div>
+					</div> -->
 				<% end %>
 			</div>
 			<div class="col-md-4">
 				<%= link_to game_path('stock'), class: "preview" do %>
-					<div class="panel panel-default">
-						<div class="panel-heading">
-							<img src=<%= asset_path 'stock.png' %> alt="Fixed Deposit" class="img-thumbnail" >
-						</div>
+					<!-- <div class="panel panel-default"> -->
+						<!-- <div class="panel-heading"> -->
+							<img src=<%= asset_path 'stock.png' %> alt="Fixed Deposit" class="img-thumbnail">
+<!-- 						</div>
 						<div class="panel-body text-center">
 							<p>Stock</p>
 						</div>
 					</div>
-				<% end %>
+ -->				<% end %>
 			</div>
 		</div>
 		<div class="row">
@@ -103,7 +112,7 @@
 		</div>
 
 	</div>
-</div>
+<!-- </div> -->
 
 
 
