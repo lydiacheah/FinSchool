@@ -31,6 +31,7 @@ Rails.application.routes.draw do
   post '/refresh_fd_rates' => 'games#refresh_fixed_depoits_rates'
   post '/refresh_ut_rates' => 'games#refresh_unit_trust_rates'
   post '/refresh_s_rates' => 'games#refresh_stock_rates'
+  post '/users/profile' => ''
 
   # Transaction routes
   resources :transactions, only: [:create, :show, :index]
