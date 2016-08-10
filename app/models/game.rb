@@ -1,3 +1,3 @@
-class Game < ApplicationRecord::Base
+class Game < ActiveRecord::Base
 	has_many :transactions
 end
