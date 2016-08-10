@@ -2,7 +2,7 @@ class GamesController < ApplicationController
 	before_action :set_user_and_profile
 
 	require 'json'
-	# include GamesHelper
+	include GamesHelper
 
 	def show
 		games = params[:id]
