@@ -1,6 +1,14 @@
 <div id="mySidenav" class="sidenav">
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-  <div class="avatar"></div>
+  <div class="logo-nav">
+    <a href="#" id="logo-nav">
+      <div id="wrap-nav">
+        <div id="left-lg">ou</div>
+        <div id="mid-lg">RM</div>
+        <div id="right-lg">oney</div>
+      </div>
+    </a>
+  </div>
   <%= link_to "Edit Profile", edit_user_path(current_user.id) %>
   <%= link_to "Home", games_path %>
   <a id="financial_product">Financial Product</a>
