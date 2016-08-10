@@ -1,4 +1,4 @@
-class GamesController < ApplicationController
+class GamesController <ActionController::Base
 	before_action :set_user_and_profile
 
 	require 'json'
