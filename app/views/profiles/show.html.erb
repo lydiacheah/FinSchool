@@ -29,7 +29,7 @@
 			<div class="panel-body box box-1">
 				<div class="text-center">
 				<% if @fixed_deposit_roi.nan? %>
-					<h2 id="word">Try it now!</h2>
+					<h2><%=link_to "Try it now!", game_path("fixed_deposit"), id:"word"%></h2>
 				<% else %>
 					<h2 id="word">ROI: <%= @fixed_deposit_roi.round(2) %>%</h2>
 				<% end %>
@@ -47,7 +47,7 @@
 			<div class="panel-body box box-2">
 				<div class="text-center">
 				<% if @unit_trust_roi.nan? %>
-					<h2 id="word">Try it now!</h2>
+					<h2><%=link_to "Try it now!", game_path("unit_trust"), id:"word"%></h2>
 				<% else %>
 					<h2 id="word">ROI: <%= @unit_trust_roi.round(2) %> %</h2>
 				<% end %>
@@ -65,7 +65,7 @@
 			<div class="panel-body box box-3">
 				<div class="text-center">
 				<% if @stock_market_roi.nan? %>
-					<h2 id="word">Try it now!</h2>
+					<h2><%=link_to "Try it now!", game_path("stock"), id:"word"%></h2>
 				<% else %>
 					<h2 id="word">ROI: <%= @stock_market_roi.round(2) %> %</h2>
 				<% end %>
