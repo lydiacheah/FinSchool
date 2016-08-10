@@ -93,7 +93,7 @@
 }
 
 /* The navigation menu links */
-.sidenav>a {
+.sidenav a:not(#logo-nav) {
   text-align: center;
   padding: 8px 8px 8px 0px;
   text-decoration: none;
@@ -102,6 +102,7 @@
   display: block;
   transition: 0.3s;
 }
+
 
 /* When you mouse over the navigation links, change their color */
 .sidenav a:hover, .offcanvas a:focus{
@@ -175,10 +176,6 @@
 
 .logo{
   margin-left:45vw;
-}
-
-body{
-  background:grey;
 }
 
 #logo{
@@ -285,7 +282,7 @@ body{
 }
 
 .logo-nav{
-  height:120px;
+  height:90px;
 }
 
 #wrap-nav{
