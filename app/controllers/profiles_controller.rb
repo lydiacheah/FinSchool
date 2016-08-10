@@ -76,12 +76,12 @@ class ProfilesController < ApplicationController
 			]
 
 		## Horizontal Bars, sum of amount earned by game ##
-		fd_total_earnings = @user_list_transaction.where(game_id: 1).sum(:end_amount)
-		ut_total_earnings = @user_list_transaction.where(game_id: 2).sum(:end_amount)
-		sm_total_earnings = @user_list_transaction.where(game_id: 3).sum(:end_amount)
-		@activity_earnings = [["Fixed Deposit",fd_total_earnings],
-							["Unit Trust",ut_total_earnings],
-							["Stock Market",sm_total_earnings]]
+		@fd_total_earnings = @user_list_transaction.where(game_id: 1).sum(:end_amount)
+		@ut_total_earnings = @user_list_transaction.where(game_id: 2).sum(:end_amount)
+		@sm_total_earnings = @user_list_transaction.where(game_id: 3).sum(:end_amount)
+		@activity_earnings = [["Fixed Deposit",@fd_total_earnings-@fd_investments],
+							["Unit Trust",@ut_total_earnings-@ut_investments],
+							["Stock Market",@sm_total_earnings-@sm_investments]]
 
 	end
 

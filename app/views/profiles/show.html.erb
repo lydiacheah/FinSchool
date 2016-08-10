@@ -13,19 +13,11 @@
 			<div class="col-md-8 col-md-offset-2">
 				<div class="progress">			
 					<div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: <%= @current_balance %>%">
-		  				<%= @current_balance.round(2) %>%
+		  				<%= @current_balance.round %>%
 		  			</div>		  			
-		  		</div>		  				
-
-			<h3>Current Balance: RM <%= @current_balance %></h3>
-			<div class="col-md-8 col-md-offset-2">
-				<div class="progress">			
-					<div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow=<%= @financial_progress %> aria-valuemin="0" aria-valuemax="100" style="width:<%= @financial_progress %>%">
-		  				<%= @financial_progress.round %>%
-		  			</div>
-				</div>	  	
-			</div>
-			RM <%= current_user_active_profile.financial_goal.round(2) %>
+		  		</div>			  		 	
+		  	</div>	
+		  	RM <%= current_user_active_profile.financial_goal.round(2) %>	 		
 		</div>
 	</div>	
 	<br>
@@ -82,17 +74,47 @@
 	<div class="row">
 		<div class="col-md-6 text-center">
 			<h3>Earning By Games</h3>
-			<%= bar_chart @activity_earnings %>			
+			<%= bar_chart({"Fixed Deposit" => @fd_total_earnings-@fd_investments,
+							"Unit Trust" => @ut_total_earnings-@ut_investments,
+							"Stock Market" => @sm_total_earnings-@sm_investments}) %>
+			
 		</div>
 
 		<div class="col-md-6 text-center">
 			<h3>Amount of Investment by Game</h3>
-			<%= pie_chart({"FixedDeposit" => @fd_investments, 
+			<%= pie_chart({"FixedDeposit" => @fd_investments,
 							"UnitTrust" => @ut_investments, 
-							"StockMarket" => @sm_investments}) %>
+							"StockMarket" => @sm_investments}, colors: ["#77BAFF", "#EDB5C3", "#65E273"]) %>
 		</div>
 	</div>	
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
