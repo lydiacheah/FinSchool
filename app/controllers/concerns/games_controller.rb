@@ -1,5 +1,5 @@
-class GamesController < ActionController::Base
-	def show
+# class GamesController < ActionController::Base
+# 	def show
 		
-	end
-end
+# 	end
+# end
