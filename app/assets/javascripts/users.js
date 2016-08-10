@@ -1,4 +1,4 @@
-$(document).ready(function() {
+$(document).on('turbolinks:load', function() {
 	$('.sign-up-questions').fadeIn(900);
 
 	$("#nickname-input").keypress(function(event){

@@ -534,7 +534,7 @@
 
       // processing of numbers of unit buyable given the user's current balance to be displayed on the table
       var current_balance = Number($('#current_balance').text());
-      var unitBuyable = Math.floor(current_balance/rate);
+      var unitBuyable = Math.floor(current_balance/adjustedRate);
       $('#qty').attr("placeholder", "Maximum unit can be bought: "+unitBuyable);
             
     } // updateStatusTable
