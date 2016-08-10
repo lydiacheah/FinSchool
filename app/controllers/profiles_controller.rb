@@ -25,7 +25,7 @@ class ProfilesController < ApplicationController
 		## Calculation of variables to be charted:
 
 		@financial_goal = 500000
-		@current_balance = 12000
+		# @current_balance = 12000
 
 		## Fixed Deposit ROI values
 		@fixed_deposit_roi = 0.56
@@ -35,6 +35,7 @@ class ProfilesController < ApplicationController
 
 		## Stock Market ROI values
 		@stock_market_roi = 0.45
+		@current_balance = @profile.current_balance/@profile.financial_goal * 100
 
 		##                Second Row                ##
 		## Calculation of variables to be charted:
