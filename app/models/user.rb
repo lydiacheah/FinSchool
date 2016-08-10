@@ -4,6 +4,7 @@ class User < ApplicationRecord
   validates :name, presence: {message: "Please enter your full name."}
   validates :email, presence: {message: "Please enter your email address."}, format: {with: /.+@.+\..+/i, message: "Please enter a valid email address."}
   # validates :password, presence: {message: "Please enter a password."}
+  validates :nickname, length: {maximum: 12}
 
   has_many :authentications, dependent: :destroy
   has_many :profiles, dependent: :destroy
