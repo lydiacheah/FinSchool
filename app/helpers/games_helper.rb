@@ -15,15 +15,15 @@ module GamesHelper
   end
 
 	def stock_rates
-		rate1 = rand(2.1..3.5).round(2)
-		rate2 = rand(2.1..3.5).round(2)
-		rate3 = rand(2.1..3.5).round(2)
-		rate4 = rand(2.1..3.5).round(2)
-		rate5 = rand(2.1..3.5).round(2)
-    rate6 = rand(2.1..3.5).round(2)
-    rate7 = rand(2.1..3.5).round(2)
-    rate8 = rand(2.1..3.5).round(2)
-    rate9 = rand(2.1..3.5).round(2)
+		rate1 = (rand(1.1..1.2) * rand(0.92..1.2)).round(2) #finance -8%<PY<+20%
+    rate2 = (rand(1.3..1.4) * rand(0.95..1.25)).round(2) #contruction -5%<PY<+25%
+    rate3 = (rand(1.5..1.6) * rand(0.93..1.1)).round(2) #plantation -7%<PY<+10%
+		rate4 = (rand(1.2..1.3) * rand(0.85..1.3)).round(2) #consumer -15%<PY<+30%
+    rate5 = (rand(1.4..1.5) * rand(0.9..1.18)).round(2) #technology -10%<PY<+18%
+    rate6 = (rand(1.6..1.7) * rand(0.9..1.21)).round(2) #properties -10%<PY<+21%
+    rate7 = (rand(1.7..1.8) * rand(0.75..1.25)).round(2) #trading -25%<PY<+25%
+    rate8 = (rand(1.8..1.9) * rand(0.9..1.3)).round(2) #utilities -10%<PY<+30%
+    rate9 = (rand(1.0..1.1) * rand(0.92..1.25)).round(2) #healthcare -8%<PY<+25%
 		s_rates = [rate1, rate2, rate3, rate4, rate5, rate6, rate7, rate8, rate9].to_json
 	end
 

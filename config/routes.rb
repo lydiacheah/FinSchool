@@ -2,8 +2,7 @@ Rails.application.routes.draw do
 
   
   root 'users#home'
-  resources :games
-
+  
   # Omniauth Routes
   get "/auth/:provider/callback" => "sessions#create_from_omniauth"
   resources :users, only: [:show, :edit, :update, :destroy] 

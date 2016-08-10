@@ -118,9 +118,14 @@ label {
 	cursor: pointer;
 }
 
+.preview:hover img {
+	margin-top: -5px;
+}
+
 .img-thumbbail:hover img{
 	margin-top: -5px;
 }
+
 /*
 .jumbotron {
 	width: 60%;

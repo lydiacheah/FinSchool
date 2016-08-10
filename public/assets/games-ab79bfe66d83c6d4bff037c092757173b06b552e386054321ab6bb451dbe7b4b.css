@@ -1,0 +1,158 @@
+/*body {
+	background-color: #F8F8F8;
+
+}*/
+/*.background {
+	position:fixed;
+	padding: 0;
+	margin: 0;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+	z-index: 10;
+	
+}*/
+/* line 27, /home/lucaslcy/Desktop/NextAcademy/FinSchool/app/assets/stylesheets/games.scss */
+.jumbotron {
+  background-image: url("index-jumbotron.jpg");
+  height: 32em;
+  width: 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position-y: -15em;
+  /*padding: -20px;*/
+  opacity: 0.7;
+  margin: 0;
+}
+
+@media (max-width: 1127px) {
+  background-position-x: 0;
+  height: 10em;
+}
+/* line 44, /home/lucaslcy/Desktop/NextAcademy/FinSchool/app/assets/stylesheets/games.scss */
+#welcome-goals {
+  background: rgba(255, 255, 255, 0.65);
+  width: 500px;
+  margin: auto;
+}
+
+/* line 50, /home/lucaslcy/Desktop/NextAcademy/FinSchool/app/assets/stylesheets/games.scss */
+#welcome-goals:hover {
+  background: rgba(255, 255, 255, 0.8);
+}
+
+/* line 54, /home/lucaslcy/Desktop/NextAcademy/FinSchool/app/assets/stylesheets/games.scss */
+#welcome-back {
+  font-family: 'Comfortaa', "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+  color: black;
+  font-size: 100px;
+  margin-bottom: 75px;
+  text-align: center;
+}
+
+/* line 62, /home/lucaslcy/Desktop/NextAcademy/FinSchool/app/assets/stylesheets/games.scss */
+.goal {
+  font-family: 'Raleway', "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+  font-size: 25px;
+  text-align: center;
+  font-weight: 300;
+  color: black;
+  opacity: 1;
+  padding: 10px;
+}
+
+/* line 72, /home/lucaslcy/Desktop/NextAcademy/FinSchool/app/assets/stylesheets/games.scss */
+#welcome-financial-goal {
+  padding-bottom: 0;
+  font-weight: 600;
+}
+
+/* line 77, /home/lucaslcy/Desktop/NextAcademy/FinSchool/app/assets/stylesheets/games.scss */
+#welcome-current-balance {
+  padding-top: 0;
+  font-weight: 600;
+}
+
+/* line 82, /home/lucaslcy/Desktop/NextAcademy/FinSchool/app/assets/stylesheets/games.scss */
+.container {
+  width: 80%;
+  color: #404040;
+}
+
+/* line 88, /home/lucaslcy/Desktop/NextAcademy/FinSchool/app/assets/stylesheets/games.scss */
+#instructions {
+  font-family: 'Raleway', 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif;
+  font-size: 30px;
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+/* line 95, /home/lucaslcy/Desktop/NextAcademy/FinSchool/app/assets/stylesheets/games.scss */
+label {
+  color: #565a5c;
+  font-size: 1.1em;
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+
+/* line 102, /home/lucaslcy/Desktop/NextAcademy/FinSchool/app/assets/stylesheets/games.scss */
+.font_awesome {
+  margin-left: 100px;
+}
+
+/* line 106, /home/lucaslcy/Desktop/NextAcademy/FinSchool/app/assets/stylesheets/games.scss */
+.fa {
+  color: #565a5c;
+}
+
+/* line 111, /home/lucaslcy/Desktop/NextAcademy/FinSchool/app/assets/stylesheets/games.scss */
+.preview {
+  font-size: 20px;
+  color: black;
+}
+
+/* line 116, /home/lucaslcy/Desktop/NextAcademy/FinSchool/app/assets/stylesheets/games.scss */
+.preview:hover, .preview:focus {
+  text-decoration: none;
+  color: #9babb9;
+  cursor: pointer;
+}
+
+/* line 122, /home/lucaslcy/Desktop/NextAcademy/FinSchool/app/assets/stylesheets/games.scss */
+.img-thumbbail:hover img {
+  margin-top: -5px;
+}
+
+/*
+.jumbotron {
+	width: 60%;
+	position: center;
+	margin: 20px auto;
+}*/
+/* Unit Trust Game CSS */
+/* to remove top table border of the buy button */
+/* line 134, /home/lucaslcy/Desktop/NextAcademy/FinSchool/app/assets/stylesheets/games.scss */
+#buy_btn {
+  border-top: 0;
+}
+
+/* auto row numbering for table */
+/* line 139, /home/lucaslcy/Desktop/NextAcademy/FinSchool/app/assets/stylesheets/games.scss */
+#holdings_summary table {
+  counter-reset: rowNumber;
+}
+
+/* line 143, /home/lucaslcy/Desktop/NextAcademy/FinSchool/app/assets/stylesheets/games.scss */
+#holdings_summary table tbody tr {
+  counter-increment: rowNumber;
+}
+
+/* line 147, /home/lucaslcy/Desktop/NextAcademy/FinSchool/app/assets/stylesheets/games.scss */
+#holdings_summary table tbody tr td:first-child::before {
+  content: counter(rowNumber);
+}
