@@ -2,12 +2,22 @@
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
   <div class="avatar"></div>
   <%= link_to "Edit Profile", edit_user_path(current_user.id) %>
-  <%= link_to "Index", games_path %>
-  <%= link_to "Game 1", game_path("fixed_deposit") %>
-  <%= link_to "Game 2", game_path("unit_trust") %>
-  <%= link_to "Game 3", game_path("stock") %>
+  <%= link_to "Home", games_path %>
+  <a id="financial_product">Financial Product</a>
+  <div id="nav_dropdown" style="display:none">
+	  <%= link_to "Fixed Deposit", game_path("fixed_deposit") %>
+	  <%= link_to "Unit Trust", game_path("unit_trust") %>
+	  <%= link_to "Stock", game_path("stock") %>
+  </div>
   <%= link_to "Summary", profile_path(current_user.id) %>
   <%= link_to "Sign Out", sign_out_path, method: :delete %>
 </div>
 
 <div onclick="openNav()" id="open-navbar-button">></div>
+
+<script>
+	$('#financial_product').click(function(){
+		$('#nav_dropdown').toggle();
+	})
+
+</script>
