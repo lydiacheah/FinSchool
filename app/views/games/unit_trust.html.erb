@@ -259,7 +259,7 @@
 
         // to enable / disable buy button depending on the user's current balance
         var current_balance = Number($('#current_balance').text());
-        if (value == 0 || value > current_balance){
+        if (value < 1 || value > current_balance){
           $('#buy').attr('disabled', 'true');
         }else if (value <= current_balance){
           $('#buy').removeAttr('disabled');

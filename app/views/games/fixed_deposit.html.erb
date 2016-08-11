@@ -155,7 +155,7 @@
     $('#user_amount').on('input change blur', function(){
       var startBalance = Number($('#start_balance').text());
       var placementAmount = $('#user_amount').val();
-      if (placementAmount > startBalance || placementAmount == 0 || $interestRate == 0){
+      if (placementAmount > startBalance || placementAmount < 1 || $interestRate == 0){
         $('#place').attr('disabled', 'true');
       }else{
         $('#place').removeAttr('disabled');
