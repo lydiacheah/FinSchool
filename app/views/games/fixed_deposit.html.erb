@@ -131,6 +131,12 @@
     $endAmount = 0;
     $months = 0;
 
+    function scroll(){
+      $('html, body').animate({
+        scrollTop: $("#status").offset().top
+      },1000);
+    }
+
     $('#place').attr('disabled', 'true');
     $('#withdraw').attr('disabled', 'true');
     $('#user_amount').removeAttr('disabled');
@@ -156,6 +162,7 @@
       if ($('user_amount').val() != 0 && progressbar == 0){
         $('#place').removeAttr('disabled');
       }
+      scroll();
     })
 
     $('#6months').click(function(){
@@ -169,6 +176,7 @@
       if ($('user_amount').val() != 0 && progressbar == 0){
         $('#place').removeAttr('disabled');
       }
+      scroll();
     })
 
     $('#9months').click(function(){
@@ -182,6 +190,7 @@
       if ($('user_amount').val() != 0 && progressbar == 0){
         $('#place').removeAttr('disabled');
       }
+      scroll();
     })
 
 
