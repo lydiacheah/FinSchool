@@ -93,9 +93,22 @@
     </div>    
   </div>
 
+<hr>
+<div>
+  <div class="progress">
+      <div class="progress-bar progress-bar-striped active" id="fd_pb" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width:0%;"></div>
+  </div>
+  <table id="timeline" style="width:100%;">
+      <thead>
+        <th class="col-xs-3 col-sm-3 col-md-3 col-lg-3" id="scale1"></th>
+        <th class="col-xs-3 col-sm-3 col-md-3 col-lg-3 text-center" id="scale2"></th>
+        <th class="col-xs-3 col-sm-3 col-md-3 col-lg-3 text-center" id="scale3"></th>
+        <th class="col-xs-3 col-sm-3 col-md-3 col-lg-3 text-right" id="scale4"></th>
+      </thead>
+    </table>
+</div>
 
-
-
+  <br>
  <div id="status">
    <p>Current Balance : <span id="start_balance"><%= current_user_active_profile.current_balance %></span></p>
    <p>Amount Placed : <span id="amount_placed">0</span></p>
@@ -111,9 +124,7 @@
   </div>
 
   
-  <div class="progress">
-    <div class="progress-bar progress-bar-striped active" id="fd_pb" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width:0%;"></div>
-  </div>
+  
   
 
 
@@ -162,7 +173,12 @@
       if ($('user_amount').val() != 0 && progressbar == 0){
         $('#place').removeAttr('disabled');
       }
+      $('#scale1').text("Month 0");
+      $('#scale2').text("Month 1");
+      $('#scale3').text("Month 2");
+      $('#scale4').text("Month 3");
       scroll();
+
     })
 
     $('#6months').click(function(){
@@ -176,6 +192,10 @@
       if ($('user_amount').val() != 0 && progressbar == 0){
         $('#place').removeAttr('disabled');
       }
+      $('#scale1').text("Month 0");
+      $('#scale2').text("Month 2");
+      $('#scale3').text("Month 4");
+      $('#scale4').text("Month 6");
       scroll();
     })
 
@@ -190,6 +210,10 @@
       if ($('user_amount').val() != 0 && progressbar == 0){
         $('#place').removeAttr('disabled');
       }
+      $('#scale1').text("Month 0");
+      $('#scale2').text("Month 3");
+      $('#scale3').text("Month 6");
+      $('#scale4').text("Month 9");
       scroll();
     })
 
