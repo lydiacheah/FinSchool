@@ -205,7 +205,7 @@
   <button id="stop">Stop</button>
   <br>
 
-  <div class="status">
+  <div class="status" id="transaction">
     <table class="table">
       <thead>
         <th class="col-xs-3 col-sm-3 col-md-3 col-lg-3 text-center">Unit</th>
@@ -218,7 +218,7 @@
       </thead>
       <tbody>
         <tr>
-          <td class="text-center"><input type="number" class="form-control" id="qty" autocomplete="off" placeholder="Maximum unit can be bought:" /></td>
+          <td class="text-center"><input type="number" class="form-control" id="qty" min="1" autocomplete="off" placeholder="Maximum unit can be bought:" /></td>
           <td class="text-center">x</td>
           <td id="selected_stock_sector">0.00</td>
           <td class="text-center">=</td>
@@ -286,6 +286,12 @@
 
     $selectedFund = null;
 
+    function scroll(){
+      $('html, body').animate({
+        scrollTop: $("#transaction").offset().top
+      },1000);
+    }
+
     // initialiaztion of buy button
     function initialize(){
       $('#buy').attr('disabled', 'true');
@@ -319,6 +325,7 @@
       $('#s8').css("border", "");
       $('#s9').css("border", "");
       $('#qty').val("");
+      scroll()
     });
     $('#s2').click(function(){
       $(this).css("border", "1px red solid");
@@ -333,6 +340,7 @@
       $('#s8').css("border", "");
       $('#s9').css("border", "");
       $('#qty').val("");
+      scroll()
     });
     $('#s3').click(function(){
       $(this).css("border", "1px red solid");
@@ -347,6 +355,7 @@
       $('#s8').css("border", "");
       $('#s9').css("border", "");
       $('#qty').val("");
+      scroll()
     });
     $('#s4').click(function(){
       $(this).css("border", "1px red solid");
@@ -361,6 +370,7 @@
       $('#s8').css("border", "");
       $('#s9').css("border", "");
       $('#qty').val("");
+      scroll()
     });
     $('#s5').click(function(){
       $(this).css("border", "1px red solid");
@@ -375,6 +385,7 @@
       $('#s8').css("border", "");
       $('#s9').css("border", "");
       $('#qty').val("");
+      scroll()
     });
     $('#s6').click(function(){
       $(this).css("border", "1px red solid");
@@ -389,6 +400,7 @@
       $('#s8').css("border", "");
       $('#s9').css("border", "");
       $('#qty').val("");
+      scroll()
     });
     $('#s7').click(function(){
       $(this).css("border", "1px red solid");
@@ -403,6 +415,7 @@
       $('#s8').css("border", "");
       $('#s9').css("border", "");
       $('#qty').val("");
+      scroll()
     });
     $('#s8').click(function(){
       $(this).css("border", "1px red solid");
@@ -417,6 +430,7 @@
       $('#s7').css("border", "");
       $('#s9').css("border", "");
       $('#qty').val("");
+      scroll()
     });
     $('#s9').click(function(){
       $(this).css("border", "1px red solid");
@@ -431,6 +445,7 @@
       $('#s7').css("border", "");
       $('#s8').css("border", "");
       $('#qty').val("");
+      scroll()
     });
     // fund selection display
 
