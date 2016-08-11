@@ -99,15 +99,25 @@
   <hr>  
   <br>
 
-  <div class="progress">
-    <div class="progress-bar progress-bar-striped active" id="ut_pb" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width:0%;"></div>
+  <div>
+    <div class="progress">
+      <div class="progress-bar progress-bar-striped active" id="ut_pb" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width:0%;"></div>
+    </div>
+    <table id="timeline" style="width:100%;">
+      <thead>
+        <th class="col-xs-4 col-sm-4 col-md-4 col-lg-4">Day 0</th>
+        <th class="col-xs-4 col-sm-4 col-md-4 col-lg-4 text-center">Day 15</th>
+        <th class="col-xs-4 col-sm-4 col-md-4 col-lg-4 text-right">Day 30</th>
+      </thead>
+    </table>
   </div>
+  <br>
 
   <button id="start">Start</button>
   <button id="stop">Stop</button>
   <br>
 
-  <div class="status">
+  <div class="status" id="transaction">
     <table class="table">
       <thead>
         <th class="col-xs-3 col-sm-3 col-md-3 col-lg-3 text-center">Unit</th>
@@ -120,7 +130,7 @@
       </thead>
       <tbody>
         <tr>
-          <td class="text-center"><input type="number" class="form-control" id="qty" autocomplete="off" placeholder="Maximum unit can be bought:" /></td>
+          <td class="text-center"><input type="number" class="form-control" id="qty" min="1" autocomplete="off" placeholder="Maximum unit can be bought:" /></td>
           <td class="text-center">x</td>
           <td id="selected_nav">0</td>
           <td class="text-center">+</td>
@@ -190,6 +200,14 @@
 
     $selectedFund = null;
 
+    // auto scroller to take user to buying section after clicking on any funds
+
+    function scroll(){
+      $('html, body').animate({
+        scrollTop: $(".progress").offset().top
+      },1000);
+    }
+
     // initialiaztion of buy button
     function initialize(){
       $('#buy').attr('disabled', 'true');
@@ -211,6 +229,7 @@
       $('#fundB').css("border", "");
       $('#fundC').css("border", "");
       $('#qty').val("");
+      scroll();
     });
     $('#fundB').click(function(){
       $(this).css("border", "1px red solid");
@@ -219,6 +238,7 @@
       $('#fundA').css("border", "");
       $('#fundC').css("border", "");
       $('#qty').val("");
+      scroll();
     });
     $('#fundC').click(function(){
       $(this).css("border", "1px red solid");
@@ -227,6 +247,7 @@
       $('#fundA').css("border", "");
       $('#fundB').css("border", "");
       $('#qty').val("");
+      scroll();
     }); // fund selection display
 
     // to update the total on input after the user has selected the desired fund

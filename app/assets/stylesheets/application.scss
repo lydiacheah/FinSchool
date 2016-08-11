@@ -130,50 +130,11 @@
   .sidenav a {font-size: 18px;}
 }
 
-/*body {
+body {
 	background-color: #F8F8F8;
-}*/
-
-/* logo */
-#left, #mid, #right{
-  display:inline;
-  font-family: 'Niconne', cursive;
-  color:white;
 }
 
-#mid{
-  font-size:20px;
-}
-
-#wrap{
-  margin-top:3%;
-  position:relative;
-  width:97px;
-  height:97px;
-  border:2px solid white;
-  border-radius:50%;
-  padding-top:30px;
-  transition:border 2s ease-in-out;
-  animation: change 2s infinite;
-}
-#left{
-  margin-left:20px;
-  opacity:0;
-  transition:margin-left 2s ease-in-out, opacity 1s ease-in-out;
-  animation: changeleft 2s infinite;
-}
-#mid{
-  margin-left:-10px;
-  transition:margin-left 2s ease-in-out, color 1s ease-in-out;
-  animation: changemid 2s infinite;
-}
-#right{
-  margin-left:-30px;
-  opacity:0;
-  transition:margin-left 1s ease-in-out, opacity 1s ease-in-out;
-  animation: changeright 2s infinite;
-}
-
+//* logo */
 .logo{
   margin-left:45vw;
 }
@@ -181,13 +142,7 @@
 #logo{
   text-decoration:none;
 }
-@keyframes change{
-  50%{
-    border-width:2px;
-    border-style:solid;
-    border-color:transparent;
-  }
-}
+
 
 @keyframes changeright{
   50%{
@@ -245,8 +200,7 @@
   width:200px;
   height:200px;
   padding-top:40px;
-  transition:border 2s ease-in-out;
-  animation: change 2s infinite;
+
 }
 #left-lg{
   font-size: 30px;
@@ -256,6 +210,9 @@
   padding-top:22px;
   opacity:0;
   transition:margin-left 2s ease-in-out, opacity 1s ease-in-out;
+  -webkit-animation: changeleft 2s infinite;
+  -moz-animation: changeleft 2s infinite;
+  -o-animation: changeleft 2s infinite;
   animation: changeleft 2s infinite;
 }
 #mid-lg{
@@ -267,6 +224,9 @@
   border-radius:50%;
   margin-left:-20px;
   transition:margin-left 2s ease-in-out, color 1s ease-in-out;
+  -webkit-animation: changemid 2s infinite;
+  -moz-animation: changemid 2s infinite;
+  -o-animation: changemid 2s infinite;
   animation: changemid 2s infinite;
   
 }
@@ -278,6 +238,9 @@
   padding-top:22px;
   opacity:0;
   transition:margin-left 1s ease-in-out, opacity 1s ease-in-out;
+  -webkit-animation: changeright 2s infinite;
+  -moz-animation: changeright 2s infinite;
+  -o-animation: changeright 2s infinite;
   animation: changeright 2s infinite;
 }
 
@@ -286,11 +249,12 @@
 }
 
 #wrap-nav{
-  
   position:relative;
   width:200px;
-  height:120px;
+  height:90px;
   margin-left:115px;
-  transition:border 2s ease-in-out;
-  animation: change 2s infinite;
+}
+
+.progress{
+  margin-bottom:10px;
 }
