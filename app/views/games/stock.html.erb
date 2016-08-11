@@ -196,10 +196,21 @@
 
 
 
-
-<div class="progress">
-    <div class="progress-bar progress-bar-striped active" id="s_pb" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width:0%;"></div>
+  <div>
+    <div class="progress">
+        <div class="progress-bar progress-bar-striped active" id="s_pb" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width:0%;"></div>
+    </div>
+    <table id="timeline" style="width:100%;">
+      <thead>
+        <th class="col-xs-4 col-sm-4 col-md-4 col-lg-4">Day 0</th>
+        <th class="col-xs-4 col-sm-4 col-md-4 col-lg-4 text-center">Day 15</th>
+        <th class="col-xs-4 col-sm-4 col-md-4 col-lg-4 text-right">Day 30</th>
+      </thead>
+    </table>
   </div>
+  <br>
+  
+
 
   <button id="start">Start</button>
   <button id="stop">Stop</button>
@@ -288,7 +299,7 @@
 
     function scroll(){
       $('html, body').animate({
-        scrollTop: $("#transaction").offset().top
+        scrollTop: $(".progress").offset().top
       },1000);
     }
 
